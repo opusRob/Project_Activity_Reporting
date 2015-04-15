@@ -1,0 +1,37 @@
+<h1>Listing employers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Is Active</th> 
+      <th>Is Deleted</th>
+      <th>Created Date</th>
+      <th>Updated Date</th>
+      <th>Deleted Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employers.each do |employer| %>
+      <tr>
+        <td><%= employer.name %></td>
+        <td><%= employer.is_active ? "Yes" : "No" %></td>
+        <td><%= employer.is_deleted ? "Yes" : "No" %></td>
+        <td><%= employer.created_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
+        <td><%= employer.updated_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
+        <td>
+        	<%= employer.deleted_at.blank? ? "&nbsp;".html_safe : employer.deleted_at.strftime("%m/%d%Y %l:%M:%S %p") %>
+        </td>
+        <td><%= link_to 'Show', employer %></td>
+        <td><%= link_to 'Edit', edit_employer_path(employer) %></td>
+        <td><%= link_to 'Delete', employer, method: :delete, data: { confirm: 'Are you sure you want to delete this record?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Employer', new_employer_path %>

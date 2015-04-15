@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @employer.name %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @employer.is_active ? "Yes" : "No" %>
+</p>
+
+<p>
+  <strong>Is deleted:</strong>
+  <%= @employer.is_deleted ? "Yes" : "No" %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @employer.created_at.strftime("%m/%d%Y %l:%M:%S %p") %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= @employer.updated_at.strftime("%m/%d%Y %l:%M:%S %p") %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @employer.deleted_at.blank? ? "&nbsp;".html_safe : employer.deleted_at.strftime("%m/%d%Y %l:%M:%S %p") %>
+</p>
+
+<%= link_to 'Edit', edit_employer_path(@employer) %> |
+<%= link_to 'Back', employers_path %>

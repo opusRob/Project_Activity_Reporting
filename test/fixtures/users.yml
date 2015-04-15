@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  password: MyString
+  first_name: MyString
+  last_name: MyString
+  password_last_updated_at: 2015-04-07
+  employer_id: 1
+  role_id: 1
+  is_active: false
+  is_deleted: false
+  deleted_at: 2015-04-07
+
+two:
+  username: MyString
+  password: MyString
+  first_name: MyString
+  last_name: MyString
+  password_last_updated_at: 2015-04-07
+  employer_id: 1
+  role_id: 1
+  is_active: false
+  is_deleted: false
+  deleted_at: 2015-04-07
