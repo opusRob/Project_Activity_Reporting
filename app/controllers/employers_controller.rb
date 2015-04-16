@@ -64,19 +64,31 @@ class EmployersController < ApplicationController
 
 	# DELETE /employers/1
 	# DELETE /employers/1.json
-	# def destroy
-	# @employer.destroy
-	# respond_to do |format|
-	# format.html { redirect_to employers_url, notice: 'Employer was successfully destroyed.' }
-	# format.json { head :no_content }
-	# end
-	# end
+ 	def destroy
+		@employer = Employer.find(params[:id])
+		@employer.destroy
+		respond_to do |format|
+			format.html { redirect_to employers_url, notice: 'Employer was successfully destroyed.' }
+			format.json { head :no_content }
+		end
+	end
 	
 	def activate
-		Rails.logger.debug "Hello?!@?"
-		params[:employer][:utf8] = "&#x2713;"
-		params[:employer][:_method] = "patch"
+		Rails.logger.debug "params:#{params.inspect}"
+		@employer = Employer.find(params[:id])
+		params = Hash.new
+		params[:employer] = Hash.new
+		# params[:employer][:id] = @employer.id
+		# params[:employer][:name] = @employer.name
 		params[:employer][:is_active] = "1"
+		# params[:employer][:is_deleted] = @employer.is_deleted
+		# params[:employer][:deleted_at] = @employer.deleted_at
+		# params = @employer.clone
+		# params.deep_symbolize_keys
+		# params[:employer][:utf8] = "&#x2713;"
+		# params[:employer][:_method] = "patch"
+		
+		# params[:employer][:is_active] = "1"
 		update
 		# redirect_to :controller => "employer", :action => "update", :id => params[:employer][:id], :is_active => "1"
 	end
