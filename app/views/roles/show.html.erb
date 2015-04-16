@@ -26,8 +26,18 @@
 </p>
 
 <p>
+  <strong>Created at:</strong>
+  <%= @role.created_at.strftime("%m/%d%Y %l:%M:%S %p") %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= @role.updated_at.strftime("%m/%d%Y %l:%M:%S %p") %>
+</p>
+
+<p>
   <strong>Deleted at:</strong>
-  <%= @role.deleted_at %>
+  <%= @role.deleted_at.blank? ? "&nbsp;".html_safe : role.deleted_at.strftime("%m/%d%Y %l:%M:%S %p") %>
 </p>
 
 <%= link_to 'Edit', edit_role_path(@role) %> |

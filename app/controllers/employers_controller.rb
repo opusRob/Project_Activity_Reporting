@@ -1,5 +1,5 @@
 class EmployersController < ApplicationController
-	before_action :set_employer, only: [:show, :edit, :update, :destroy]
+	before_action :set_employer, only: [:edit, :update, :activate, :deactivate, :delete, :undelete]  #:show, :destroy
 	# GET /employers
 	# GET /employers.json
 	def index
@@ -8,8 +8,8 @@ class EmployersController < ApplicationController
 
 	# GET /employers/1
 	# GET /employers/1.json
-	def show
-	end
+	# def show
+	# end
 
 	# GET /employers/new
 	def new
@@ -32,7 +32,7 @@ class EmployersController < ApplicationController
 		respond_to do |format|
 			if @employer.save
 				format.html { redirect_to @employer, notice: 'Employer was successfully created.' }
-				format.json { render :show, status: :created, location: @employer }
+				format.json { render index, status: :created, location: employers_path }
 			else
 				format.html { render :new }
 				format.json { render json: @employer.errors, status: :unprocessable_entity }
@@ -53,8 +53,8 @@ class EmployersController < ApplicationController
 			end
 
 			if @employer.update(employer_params)
-				format.html { redirect_to @employer, notice: 'Employer was successfully updated.' }
-				format.json { render :show, status: :ok, location: @employer }
+				format.html { redirect_to employers_path, notice: 'Employer was successfully updated.' }
+				format.json { render :index, status: :ok, location: employers_path }
 			else
 				format.html { render :edit }
 				format.json { render json: @employer.errors, status: :unprocessable_entity }
@@ -71,6 +71,15 @@ class EmployersController < ApplicationController
 	# format.json { head :no_content }
 	# end
 	# end
+	
+	def activate
+		Rails.logger.debug "Hello?!@?"
+		params[:employer][:utf8] = "&#x2713;"
+		params[:employer][:_method] = "patch"
+		params[:employer][:is_active] = "1"
+		update
+		# redirect_to :controller => "employer", :action => "update", :id => params[:employer][:id], :is_active => "1"
+	end
 
 	private
 

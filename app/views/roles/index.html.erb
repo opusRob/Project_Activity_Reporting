@@ -18,10 +18,14 @@
       <tr>
         <td><%= role.name %></td>
         <td><%= role.description %></td>
-        <td><%= role.is_system_role %></td>
-        <td><%= role.is_active %></td>
-        <td><%= role.is_deleted %></td>
-        <td><%= role.deleted_at %></td>
+        <td><%= role.is_system_role ? "Yes" : "No" %></td>
+        <td><%= role.is_active ? "Yes" : "No" %></td>
+        <td><%= role.is_deleted ? "Yes" : "No" %></td>
+        <td><%= role.created_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
+        <td><%= role.updated_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
+        <td>
+        	<%= role.deleted_at.blank? ? "&nbsp;".html_safe : role.deleted_at.strftime("%m/%d%Y %l:%M:%S %p") %>
+        </td>
         <td><%= link_to 'Show', role %></td>
         <td><%= link_to 'Edit', edit_role_path(role) %></td>
         <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>

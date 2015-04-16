@@ -22,7 +22,7 @@
 
 <p>
   <strong>Password last updated at:</strong>
-  <%= @user.password_last_updated_at %>
+  <%= @user.password_last_updated_at.blank? ? "&nbsp;".html_safe : user.password_last_updated_at.strftime("%m/%d%Y %l:%M:%S %p") %>
 </p>
 
 <p>
@@ -46,8 +46,18 @@
 </p>
 
 <p>
+  <strong>Created at:</strong>
+  <%= @user.created_at.strftime("%m/%d%Y %l:%M:%S %p") %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= @user.updated_at.strftime("%m/%d%Y %l:%M:%S %p") %>
+</p>
+
+<p>
   <strong>Deleted at:</strong>
-  <%= @user.deleted_at %>
+  <%= @user.deleted_at.blank? ? "&nbsp;".html_safe : user.deleted_at.strftime("%m/%d%Y %l:%M:%S %p") %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
