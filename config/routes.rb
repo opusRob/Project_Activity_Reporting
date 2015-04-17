@@ -6,8 +6,10 @@ Rails.application.routes.draw do
 	resources :roles
 
 	resources :employers
-	post "employers/:id" => "employers#activate"
-	# get ":employer(/:activate(/:id))"
+	post "employers/:id/activate" => "employers#activate", as: "activate_employer"
+	post "employers/:id/deactivate" => "employers#deactivate", as: "deactivate_employer"
+	post "employers/:id/do_delete" => "employers#do_delete", as: "do_delete_employer"
+	post "employers/:id/undo_delete" => "employers#undo_delete", as: "undo_delete_employer"
 
 	# The priority is based upon order of creation: first created -> highest priority.
 	# See how all your routes lay out with "rake routes".

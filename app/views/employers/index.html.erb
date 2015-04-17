@@ -1,49 +1,79 @@
 <h1>Listing employers</h1>
-<p id="notice"><%= notice %></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Is Active</th> 
-      <th>Is Deleted</th>
-      <th>Created Date</th>
-      <th>Updated Date</th>
-      <th>Deleted Date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<p id="notice">
+	<%= notice %>
+</p>
 
-  <tbody>
-    <% @employers.each do |employer| %>
-      <tr>
-        <td><%= employer.name %></td>
-        <td><%= employer.is_active ? "Yes" : "No" %></td>
-        <td><%= employer.is_deleted ? "Yes" : "No" %></td>
-        <td><%= employer.created_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
-        <td><%= employer.updated_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
-        <td>
-        	<%= employer.deleted_at.blank? ? "&nbsp;".html_safe : employer.deleted_at.strftime("%m/%d%Y %l:%M:%S %p") %>
-        </td>
-        <td><%= link_to 'Edit', edit_employer_path(employer) %></td>
-        <td>
-        	# <!-- <%= link_to 'Destroy', employer, method: :delete, data: { confirm: 'Are you sure?' } %> -->
-        	<%= link_to 'Destroyy', employer_path(employer), method: :delete, data: { confirm: "Are you sure?" } %>
-        	<% if employer.is_active %>
-        		<%= link_to 'Deactivate', employer, method: :deactivate, data: { confirm: 'Are you sure you want to deactivate this record?' } %>
-        	<% else %>
-        		<%= link_to 'Activate', employer, method: :activate, data: { confirm: 'Are you sure you want to activate this record?' } %>
-        	<% end %>
-        </td>
-        <td>
-        	<% if !employer.is_deleted %>
-	        	<%= link_to 'Delete', employer, method: :delete, data: { confirm: 'Are you sure you want to delete this record?' } %>
-	        <% else %>
-	        	<%= link_to 'Undelete', employer, method: :undelete, data: { confirm: 'Are you sure you want to undelete this record?' } %>
-	        <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
+<table>
+	<thead>
+		<tr>
+			<% ary_yes_no_all = [ ["All", ""], ["Yes", 1], ["No", 0] ] %>
+			<!-- %= form_tag({controller: "employers", action: "index"}, method: "get") do % -->
+			<!-- %= form_for Employer.new, method: :get do |f| % -->
+			<%= form_for :employer, :method => "get", :url => employers_path do |f| %>
+				<th>&nbsp;</th>
+				<th>
+					<!-- Name -->
+					<%= f.label :name %>
+					<br/>
+					<%= f.text_field :name %>
+				</th>
+				<th>
+					<!-- Is Active -->
+					<%= f.label :is_active %>
+					<br/>
+					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_active) %>
+						<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: params[:employer][:is_active])%>
+					<% else %>
+						<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: "1")%>
+					<% end %>
+					<!-- %= select_tag "is_active", options_for_select(ary_yes_no_all, selected: params.has_key?(:is_active) ? params[:is_active] : "1")% -->
+				</th>
+				<th>
+					<!-- Is Deleted -->
+					<%= f.label :is_deleted %>
+					<br/>
+					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_deleted) %>
+						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: params[:employer][:is_deleted])%>
+					<% else %>
+						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: "1")%>
+					<% end %>
+					<!-- %= select_tag "is_deleted", options_for_select(ary_yes_no_all, selected: params.has_key?(:is_deleted) ? params[:is_deleted] : "0")% -->
+				</th>
+				<th>Created Date</th>
+				<th>Updated Date</th>
+				<th>Deleted Date</th>
+				<th colspan="3">
+					<%= submit_tag "Apply Filters", name: "btn_employers_apply_filters" %>
+					<!--%= f.submit "Apply Filters" %-->
+				</th>
+			<% end %>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @employers.each_with_index do |employer, employer_current_row| %>
+		<tr>
+			<td><%= employer_current_row + 1 %></td>
+			<td><%= employer.name %></td>
+			<td><%= employer.is_active ? "Yes" : "No" %></td>
+			<td><%= employer.is_deleted ? "Yes" : "No" %></td>
+			<td><%= employer.created_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
+			<td><%= employer.updated_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
+			<td> <%= employer.deleted_at.blank? ? "&nbsp;".html_safe : employer.deleted_at.strftime("%m/%d%Y %l:%M:%S %p") %> </td>
+			<td><%= link_to 'Edit', edit_employer_path(employer) %></td>
+			<td> <% if employer.is_active %>
+			<%= link_to 'Deactivate', deactivate_employer_path(employer), method: :deactivate, data: { confirm: 'Are you sure you want to deactivate this record?' } %>
+			<% else %>
+			<%= link_to 'Activate', activate_employer_path(employer), method: :activate, data: { confirm: 'Are you sure you want to activate this record?' } %>
+			<% end %> </td>
+			<td> <% if !employer.is_deleted %>
+			<%= link_to 'Delete', do_delete_employer_path(employer), method: :do_delete, data: { confirm: 'Are you sure you want to delete this record?' } %>
+			<% else %>
+			<%= link_to 'Undelete', undo_delete_employer_path(employer), method: :undo_delete, data: { confirm: 'Are you sure you want to undelete this record?' } %>
+			<% end %> </td>
+		</tr>
+		<% end %>
+	</tbody>
 </table>
 
 <br>

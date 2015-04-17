@@ -1,4 +1,3 @@
-<%= debug @employer %>
 
 <%= form_for(@employer) do |f| %>
   <% if @employer.errors.any? %>
@@ -35,6 +34,7 @@
     <%= f.check_box :is_deleted %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.button "Create Employer and Return to List", name: "btn_create_return_to_list" %>
+    <%= f.button "Create Employer and Add Another", name: "btn_create_add_another" %>
   </div>
 <% end %>
