@@ -2,7 +2,7 @@
 <p id="notice">
 	<%= notice %>
 </p>
-
+					
 <table class="table">
 	<thead>
 		<tr>
@@ -15,13 +15,17 @@
 					<!-- Name -->
 					<%= f.label :name %>
 					<br/>
-					<%= f.text_field :name %>
+					<% if params.has_key?(:employer) && params[:employer].has_key?(:name) && !params.has_key?(:btn_employers_reset_filters) %>
+						<%= f.text_field :name, value: params[:employer][:name] %>
+					<% else %>
+						<%= f.text_field :name %>
+					<% end %>
 				</th>
 				<th>
 					<!-- Is Active -->
 					<%= f.label :is_active %>
 					<br/>
-					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_active) %>
+					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_active) && !params.has_key?(:btn_employers_reset_filters) %>
 						<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: params[:employer][:is_active])%>
 					<% else %>
 						<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: "1")%>
@@ -32,10 +36,10 @@
 					<!-- Is Deleted -->
 					<%= f.label :is_deleted %>
 					<br/>
-					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_deleted) %>
+					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_deleted) && !params.has_key?(:btn_employers_reset_filters) %>
 						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: params[:employer][:is_deleted])%>
 					<% else %>
-						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: "1")%>
+						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: "0")%>
 					<% end %>
 					<!-- %= select_tag "is_deleted", options_for_select(ary_yes_no_all, selected: params.has_key?(:is_deleted) ? params[:is_deleted] : "0")% -->
 				</th>
@@ -44,6 +48,7 @@
 				<th>Deleted Date</th>
 				<th colspan="3">
 					<%= submit_tag "Apply Filters", name: "btn_employers_apply_filters" %>
+					<%= submit_tag "Reset Filters", name: "btn_employers_reset_filters" %>
 					<!--%= f.submit "Apply Filters" %-->
 				</th>
 			<% end %>

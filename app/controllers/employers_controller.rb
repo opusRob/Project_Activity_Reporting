@@ -19,26 +19,34 @@ class EmployersController < ApplicationController
 		
 		if params.has_key?(:btn_employers_apply_filters)
 			employer_filter_params = employer_params
+			employer_filter_string = ""
 			# Rails.logger.debug "**** employer_filter_params ****:#{employer_filter_params}"
-			if employer_filter_params[:name].strip.length == 0
+			if employer_filter_params[:name].length == 0
 				employer_filter_params.except!(:name)
+			else
+				employer_filter_params[:name] = "%" + employer_filter_params[:name] + "%"
+				employer_filter_string = "name LIKE :name"
 			end
 			if ["1", "0"].include?(employer_filter_params[:is_active]) == false
 				employer_filter_params.except!(:is_active)
+			else
+				employer_filter_string += (employer_filter_string.length > 0 ? " AND " : "") + "is_active = :is_active"
 			end
 			if ["1", "0"].include?(employer_filter_params[:is_deleted]) == false
 				employer_filter_params.except!(:is_deleted)
+			else
+				employer_filter_string += (employer_filter_string.length > 0 ? " AND " : "") + "is_deleted = :is_deleted"
 			end
 			# Rails.logger.debug "**** employer_filter_params ****:#{employer_filter_params}"
 			# Rails.logger.debug "**** TEST 1 ****"
 			if employer_filter_params.has_key?(:name) || employer_filter_params.has_key?(:is_active) || employer_filter_params.has_key?(:is_deleted)
-				@employers = Employer.where(employer_filter_params)
+				# @employers = Employer.where(employer_filter_params)
+				@employers = Employer.where(employer_filter_string, employer_filter_params)
 			else
 				@employers = Employer.all
 			end
 		else
-			Rails.logger.debug "**** TEST 2 ****"
-			@employers = Employer.all
+			@employers = Employer.where({is_active: true, is_deleted: false})
 		end
 		
 		# @employers = Employer.filter(params.slice(:name, :is_active, :is_deleted))
