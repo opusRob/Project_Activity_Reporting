@@ -44,6 +44,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'foreigner' 
 
+# gem 'will_paginate', '~> 3.0.6'
+gem 'kaminari'
+
 gem 'bootstrap-sass', '~> 3.3.4.1'
 gem 'autoprefixer-rails'
 gem 'sass-rails', '>= 5.0'

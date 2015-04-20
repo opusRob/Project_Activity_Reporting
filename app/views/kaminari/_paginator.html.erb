@@ -1,0 +1,59 @@
+<%# The container tag
+	- available local variables
+	current_page:  a page object for the currently displayed page
+	total_pages:   total number of pages
+	per_page:      number of items to fetch per page
+	remote:        data-remote
+	paginator:     the paginator that renders the pagination tags inside
+-%>
+
+<%
+=begin
+%>
+<% pagination = Hash.new() %>
+<% pagination[:page] = (params.has_key?(:page) ? params[:page] : 1).to_i %>
+<% pagination[:per_page] = Kaminari.config.default_per_page %>
+<% pagination[:total_count] = @employers.total_count %>
+<% pagination[:total_pages] = (pagination[:total_count] / pagination[:per_page].to_f).ceil %>
+<% pagination[:page_start_row] = ((pagination[:page] - 1) * pagination[:per_page]) + 1 %>
+<% pagination[:page_end_row] = pagination[:page] == pagination[:total_pages] ? pagination[:total_count] : pagination[:page_start_row] + pagination[:per_page] - 1 %>
+<% pagination[:rows_this_page_count] = pagination[:page_end_row] - pagination[:page_start_row] + 1 %>
+<%
+=end
+%>
+
+<%= paginator.render do -%>
+	<nav class="pagination">
+<%
+=begin
+%>
+			BEGIN ORIGINAL KAMINARI CODE:
+				<%= first_page_tag unless current_page.first? %>
+				<%= prev_page_tag unless current_page.first? %>
+				<% each_page do |page| -%>
+					<% if page.left_outer? || page.right_outer? || page.inside_window? -%>
+						<%= page_tag page %>
+					<% elsif !page.was_truncated? -%>
+						<%= gap_tag %>
+					<% end -%>
+				<% end -%>
+				<%= next_page_tag unless current_page.last? %>
+				<%= last_page_tag unless current_page.last? %>
+			/END ORIGINAL KAMINARI CODE.
+<%
+=end
+%>
+		<%= first_page_tag %>
+		|
+		<%= prev_page_tag %>
+		|
+		<%= label_tag :page %>
+		<% pagination_redirect_url = "document.location.href=('#{url_for(params.except(:page))}".html_safe + (params.except(:page).length ? "&" : "?") + "page=' + String(this.value))"  %>
+		<%= select_tag :page, options_for_select((1..(total_pages > 0 ? total_pages : 1)).to_a, selected: current_page), onchange: pagination_redirect_url %>
+		of <%= total_pages %>
+		|
+		<%= next_page_tag %>
+		|
+		<%= last_page_tag %>
+	</nav>
+<% end -%>

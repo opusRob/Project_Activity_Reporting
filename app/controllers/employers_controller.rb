@@ -4,23 +4,12 @@ class EmployersController < ApplicationController
 	# GET /employers.json
 	def index
 		
-		# search_params = Hash.new
-		# search_params["employer"] = Hash.new
-		# params.each do |param|
-			# if param.length > 1
-				# search_params["employer"][param] = params[param]
-			# end
-		# end
-		# Rails.logger.debug "**** search_params.inspect:#{search_params.inspect}"
-		# Rails.logger.debug "**** params.inspect ****:#{params.inspect}"
-		
-		# Rails.logger.debug "**** params.inspect ****:#{params.inspect}"
-		# Rails.logger.debug "**** employer_params.inspect ****:#{employer_params.inspect}"
+		page = params.has_key?(:page) ? params[:page] : 1
 		
 		if params.has_key?(:btn_employers_apply_filters)
 			employer_filter_params = employer_params
 			employer_filter_string = ""
-			# Rails.logger.debug "**** employer_filter_params ****:#{employer_filter_params}"
+
 			if employer_filter_params[:name].length == 0
 				employer_filter_params.except!(:name)
 			else
@@ -37,19 +26,18 @@ class EmployersController < ApplicationController
 			else
 				employer_filter_string += (employer_filter_string.length > 0 ? " AND " : "") + "is_deleted = :is_deleted"
 			end
-			# Rails.logger.debug "**** employer_filter_params ****:#{employer_filter_params}"
-			# Rails.logger.debug "**** TEST 1 ****"
+
 			if employer_filter_params.has_key?(:name) || employer_filter_params.has_key?(:is_active) || employer_filter_params.has_key?(:is_deleted)
-				# @employers = Employer.where(employer_filter_params)
-				@employers = Employer.where(employer_filter_string, employer_filter_params)
+				# @employers = Employer.where(employer_filter_string, employer_filter_params).paginate(:page => page)
+				@employers = Employer.where(employer_filter_string, employer_filter_params).page(page)
 			else
-				@employers = Employer.all
+				# @employers = Employer.all.paginate(:page => page)
+				@employers = Employer.all.page(page)
 			end
 		else
-			@employers = Employer.where({is_active: true, is_deleted: false})
+			# @employers = Employer.where({is_active: true, is_deleted: false}).paginate(:page => page)
+			@employers = Employer.where({is_active: true, is_deleted: false}).page(page)
 		end
-		
-		# @employers = Employer.filter(params.slice(:name, :is_active, :is_deleted))
 		
 	end
 
