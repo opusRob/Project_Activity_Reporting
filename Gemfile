@@ -54,7 +54,3 @@ gem 'kaminari'
 gem 'bootstrap-sass', '~> 3.3.4.1'
 gem 'autoprefixer-rails'
 gem 'sass-rails', '>= 5.0'
-
-gem "twitter-bootstrap-rails"
-=======
->>>>>>> 56873ca Troubleshooting bootstrap install
