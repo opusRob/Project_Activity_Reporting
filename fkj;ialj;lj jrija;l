@@ -1,0 +1,65 @@
+[33mcommit 04d841168c8fb7ca7999124018db93ab0543ccbd[m
+Author: Rob Germain <rob.germain@opusgroupllc.com>
+Date:   Wed Apr 22 11:15:43 2015 -0400
+
+    Git issues...
+
+[33mcommit 719ac714ae67ebfafb3703a6142cf960d7b9a62b[m
+Author: Rob Germain <rob.germain@opusgroupllc.com>
+Date:   Wed Apr 22 11:12:09 2015 -0400
+
+    Commit issues with Git...
+
+[33mcommit fd8ed5c22d52dd0a5a04610d5d72896a615d1c22[m
+Author: Rob Germain <rob.germain@opusgroupllc.com>
+Date:   Wed Apr 22 11:02:43 2015 -0400
+
+    Sort of got bootstrap working except for images...
+
+[33mcommit ed4eb21f05f1955c068d7050d4082a567b1b1c3e[m
+Author: Rob Germain <rob.germain@opusgroupllc.com>
+Date:   Mon Apr 20 19:19:49 2015 -0400
+
+    Pagination, using Kaminari gem with customization, working on Employers page.
+
+[33mcommit 1f6652506aa6972f8fe4aff5d72a900f259dc9cf[m
+Author: Rob Germain <rob.germain@opusgroupllc.com>
+Date:   Mon Apr 20 12:16:57 2015 -0400
+
+    Employer search filters working correctly.
+
+[33mcommit 56873ca02916cf3343c8f905bb70da879ec967fb[m
+Author: Rob Germain <rob.germain@opusgroupllc.com>
+Date:   Fri Apr 17 21:45:05 2015 -0400
+
+    Troubleshooting bootstrap install
+
+[33mcommit 310d07faade40578a46e029aa6a5bee0dfa67093[m
+Author: Rob Germain <rob.germain@opusgroupllc.com>
+Date:   Fri Apr 17 10:19:58 2015 -0400
+
+    Working: Activate/Deactivate; Delete/Undelete; partial search.
+
+[33mcommit 6996a162879b54d7928e949c1ccbd1e1db6c6162[m
+Author: Rob Germain <rob.germain@opusgroupllc.com>
+Date:   Wed Apr 15 22:18:32 2015 -0400
+
+    Troubleshooting Activate link
+
+[33mcommit 4d3bc9aca9c4ad928e389230d2aafb2288a78310[m
+Author: Rob Germain <rob.germain@opusgroupllc.com>
+Date:   Wed Apr 15 20:40:25 2015 -0400
+
+    Working on Activate link
+
+[33mcommit cd79e1179d56edaf2d971228239ba7d467371c64[m
+Author: Rob Germain <rob.germain@opusgroupllc.com>
+Date:   Wed Apr 15 15:04:42 2015 -0400
+
+    Initial code; some changes made to employers resources; some database tables.
+
+[33mcommit 7ae59899dd1db0ec58b3b1a75e514fddcee35249[m
+Author: Rob Germain <rob.germain@opusgroupllc.com>
+Date:   Wed Apr 15 14:57:17 2015 -0400
+
+    :boom::camel: Added .gitattributes

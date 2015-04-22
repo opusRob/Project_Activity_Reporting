@@ -42,6 +42,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
+gem 'execjs'
+gem "bower-rails", "~> 0.9.2"
+
 gem 'foreigner' 
 
 # gem 'will_paginate', '~> 3.0.6'
@@ -50,3 +53,5 @@ gem 'kaminari'
 gem 'bootstrap-sass', '~> 3.3.4.1'
 gem 'autoprefixer-rails'
 gem 'sass-rails', '>= 5.0'
+
+gem "twitter-bootstrap-rails"
