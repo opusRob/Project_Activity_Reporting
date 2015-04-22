@@ -1,4 +1,4 @@
-<h1>Listing employers</h1>
+<h1>Listing Employers</h1>
 <p id="notice">
 	<%= notice %>
 </p>
@@ -6,7 +6,7 @@
 
 <%= paginate @employers, :total_count => 7 %>
 <!-- %= will_paginate @employers % -->
-<table class="table">
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<% ary_yes_no_all = [ ["All", ""], ["Yes", 1], ["No", 0] ] %>
@@ -24,7 +24,7 @@
 				</th>
 				<th>
 					<!-- Is Active -->
-					<%= f.label :is_active %>
+					<%= f.label :is_active, "Is Active" %>
 					<br/>
 					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_active) && !params.has_key?(:btn_employers_reset_filters) %>
 						<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: params[:employer][:is_active])%>
@@ -34,7 +34,7 @@
 				</th>
 				<th>
 					<!-- Is Deleted -->
-					<%= f.label :is_deleted %>
+					<%= f.label :is_deleted, "Is Deleted" %>
 					<br/>
 					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_deleted) && !params.has_key?(:btn_employers_reset_filters) %>
 						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: params[:employer][:is_deleted])%>
@@ -46,8 +46,8 @@
 				<th>Updated Date</th>
 				<th>Deleted Date</th>
 				<th colspan="3">
-					<%= submit_tag "Apply Filters", name: "btn_employers_apply_filters" %>
-					<%= submit_tag "Reset Filters", name: "btn_employers_reset_filters" %>
+					<%= submit_tag "Apply Filters", name: "btn_employers_apply_filters", class: "btn btn-sm btn-default" %>
+					<%= submit_tag "Reset Filters", name: "btn_employers_reset_filters", class: "btn btn-sm btn-default" %>
 				</th>
 			<% end %>
 		</tr>

@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>ProjectActivityReporting</title>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    
+		<title>Project Activity Reporting</title>
+		
 		<%= render 'layouts/shim' %>		
-		<!--%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %-->
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+		<!-- %= stylesheet_link_tag "bootstrap" %
+		%= javascript_include_tag "bootstrap" % -->
 		<%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
 		<%= javascript_include_tag "application" %>
 		<%= csrf_meta_tags %>
+		
 	</head>
 	<body>
-		<%= link_to "Employers", employers_path %>
-		<%= link_to "Roles", roles_path %>
-		<%= link_to "Users", users_path %>
+
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Project Activity Reporting</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<% current_controller = params.has_key?(:controller) ? params[:controller] : '' %>
+				<li class="<%= current_controller == 'employers' ? 'active' : '' %>"><%= link_to "Employers", employers_path %></li>
+				<li class="<%= current_controller == 'roles' ? 'active' : '' %>"><%= link_to "Roles", roles_path %></li>
+				<li class="<%= current_controller == 'users' ? 'active' : '' %>"><%= link_to "Users", users_path %></li>
+			</ul>
+		</div>
 		<hr/>
 		<%= yield %>
 
