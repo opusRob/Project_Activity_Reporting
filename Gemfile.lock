@@ -28,6 +28,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+<<<<<<< Retry_Bootstrap_Install
     autoprefixer-rails (5.1.11)
       execjs
       json
@@ -35,6 +36,8 @@ GEM
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     bower-rails (0.9.2)
+=======
+>>>>>>> 56873ca Troubleshooting bootstrap install
     builder (3.2.2)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -85,13 +88,17 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+<<<<<<< Retry_Bootstrap_Install
     sass (3.4.13)
     sass-rails (5.0.3)
+=======
+    sass (3.2.19)
+    sass-rails (4.0.5)
+>>>>>>> 56873ca Troubleshooting bootstrap install
       railties (>= 4.0.0, < 5.0)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (~> 1.1)
+      sass (~> 3.2.2)
+      sprockets (~> 2.8, < 3.0)
+      sprockets-rails (~> 2.0)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -123,17 +130,20 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+<<<<<<< Retry_Bootstrap_Install
   autoprefixer-rails
   bootstrap-sass (~> 3.3.4.1)
   bower-rails (~> 0.9.2)
   execjs
+=======
+>>>>>>> 56873ca Troubleshooting bootstrap install
   foreigner
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
   pg
   rails (= 4.1.8)
-  sass-rails (>= 5.0)
+  sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   turbolinks
   twitter-bootstrap-rails
