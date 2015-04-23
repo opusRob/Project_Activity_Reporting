@@ -1,0 +1,25 @@
+
+.navbar .nav > li > a {
+	padding: 15px; 
+}
+
+body { padding-top: 40px; }
+
+@media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
+}
+
+select {
+	width: auto;
+	display: inline;
+	font-weight: normal; 
+}
+
+input {
+	font-weight: normal; 
+	height: auto; 
+} 
+
+// select option {
+	// font-weight: normal; 
+// }

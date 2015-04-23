@@ -1,11 +1,25 @@
+
 <h1>Listing Employers</h1>
 <p id="notice">
 	<%= notice %>
 </p>
 
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Panel title</h3>
+	</div>
+	<div class="panel-body">
+		Panel content
+	</div>
+</div>
 
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">
 <%= paginate @employers, :total_count => 7 %>
-<!-- %= will_paginate @employers % -->
+</h3>
+</div>
+<div class="panel-body">
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -17,9 +31,9 @@
 					<%= f.label :name %>
 					<br/>
 					<% if params.has_key?(:employer) && params[:employer].has_key?(:name) && !params.has_key?(:btn_employers_reset_filters) %>
-						<%= f.text_field :name, value: params[:employer][:name] %>
+						<%= f.text_field :name, value: params[:employer][:name], class: "form-control input-sm", placeholder: "Enter all or part of a name" %>
 					<% else %>
-						<%= f.text_field :name %>
+						<%= f.text_field :name, class: "form-control input-sm", placeholder: "Enter all or part of a name" %>
 					<% end %>
 				</th>
 				<th>
@@ -27,9 +41,9 @@
 					<%= f.label :is_active, "Is Active" %>
 					<br/>
 					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_active) && !params.has_key?(:btn_employers_reset_filters) %>
-						<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: params[:employer][:is_active])%>
+						<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: params[:employer][:is_active]), {}, { :class => "form-control input-sm"} %>
 					<% else %>
-						<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: "1")%>
+						<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: "1"), {}, { :class => "form-control input-sm"} %>
 					<% end %>
 				</th>
 				<th>
@@ -37,9 +51,9 @@
 					<%= f.label :is_deleted, "Is Deleted" %>
 					<br/>
 					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_deleted) && !params.has_key?(:btn_employers_reset_filters) %>
-						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: params[:employer][:is_deleted])%>
+						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: params[:employer][:is_deleted]), {}, { :class => "form-control input-sm"}  %>
 					<% else %>
-						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: "0")%>
+						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: "0"), {}, { :class => "form-control input-sm"}  %>
 					<% end %>
 				</th>
 				<th>Created Date</th>
@@ -83,7 +97,14 @@
 	</tbody>
 </table>
 
-<%= paginate @employers %>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+<%= paginate @employers, :total_count => 7 %>
+</h3>
+</div>
+</div>
 
 <br>
 
