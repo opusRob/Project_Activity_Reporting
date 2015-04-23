@@ -6,7 +6,7 @@ gem 'rails', '4.1.8'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+# gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -17,6 +17,10 @@ gem 'uglifier', '>= 1.3.0'
 
 
 
+gem 'sass-rails', '>= 5.0'
+gem 'bootstrap-sass', '~> 3.3.4.1'
+gem 'autoprefixer-rails'
+gem 'twitter-bootstrap-rails', '2.2.6'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -46,11 +50,7 @@ gem 'execjs'
 gem "bower-rails", "~> 0.9.2"
 
 gem 'foreigner' 
-<<<<<<< Retry_Bootstrap_Install
 
 # gem 'will_paginate', '~> 3.0.6'
 gem 'kaminari'
 
-gem 'bootstrap-sass', '~> 3.3.4.1'
-gem 'autoprefixer-rails'
-gem 'sass-rails', '>= 5.0'

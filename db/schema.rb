@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150407193723) do
     t.string   "name"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.datetime     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20150407193723) do
     t.boolean  "is_system_role"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.datetime     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -41,12 +41,12 @@ ActiveRecord::Schema.define(version: 20150407193723) do
     t.string   "password"
     t.string   "first_name"
     t.string   "last_name"
-    t.datetime     "password_last_updated_at"
+    t.datetime "password_last_updated_at"
     t.integer  "employer_id"
     t.integer  "role_id"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.datetime     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
