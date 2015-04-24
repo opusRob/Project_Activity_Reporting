@@ -23,18 +23,23 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :is_active %><br>
-    <%= f.check_box :is_active %>
+    <%= f.label :is_active, "Is Active" %><br/>
+    <% if action_name == "new" %>
+    	<%= f.check_box :is_active, checked: true %>
+    <% else %>
+    	<%= f.check_box :is_active %>
+    <% end %>
   </div>
   <div class="field">
-    <%= f.label :is_deleted %><br>
+    <%= f.label :is_deleted, "Is Deleted" %><br/>
     <%= f.check_box :is_deleted %>
   </div>
-  <div class="actions">
-    <%= f.button "Create Employer and Return to List", name: "btn_create_return_to_list" %>
-    <%= f.button "Create Employer and Add Another", name: "btn_create_add_another" %>
+  <div class="actions">  	
+  	<%= button_tag_bootstrap_glyphicon("submit", "btn_create_return_to_list", "sm", "primary", "Save Employer and Return to List", ["save"], {text_end: " Save Employer and Return to List"}) %>
+  	<%= button_tag_bootstrap_glyphicon("submit", "btn_create_add_another", "sm", "success", "Save Employer and Add New", ["save", "plus"], {text_end: " Save Employer and Add New"}) %>
+    <%= link_to 'Back/Cancel', employers_path, class: "btn btn-sm btn-default" %>
   </div>
 <% end %>

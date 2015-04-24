@@ -7,22 +7,21 @@
 	paginator:     the paginator that renders the pagination tags inside
 -%>
 
-<%
-=begin
-%>
+
 <% pagination = Hash.new() %>
 <% pagination[:page] = (params.has_key?(:page) ? params[:page] : 1).to_i %>
 <% pagination[:per_page] = Kaminari.config.default_per_page %>
-<% pagination[:total_count] = @employers.total_count %>
+<% pagination[:total_count] = total_count %>
 <% pagination[:total_pages] = (pagination[:total_count] / pagination[:per_page].to_f).ceil %>
 <% pagination[:page_start_row] = ((pagination[:page] - 1) * pagination[:per_page]) + 1 %>
 <% pagination[:page_end_row] = pagination[:page] == pagination[:total_pages] ? pagination[:total_count] : pagination[:page_start_row] + pagination[:per_page] - 1 %>
 <% pagination[:rows_this_page_count] = pagination[:page_end_row] - pagination[:page_start_row] + 1 %>
-<%
-=end
-%>
 
 <%= paginator.render do -%>
+	<div class="records_found">
+		Showing <%= pagination[:page_start_row] %> - <%= pagination[:page_end_row] %>
+		of <%= pluralize(pagination[:total_count], "record") %> found.
+	</div>
 	<nav class="pagination">
 <%
 =begin

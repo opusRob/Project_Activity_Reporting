@@ -1,111 +1,105 @@
 
-<h1>Listing Employers</h1>
+<h1>
+	Listing Employers
+</h1>
 <p id="notice">
 	<%= notice %>
 </p>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title">Panel title</h3>
+		<div class="panel-title">
+			<%= paginate @employers, :total_count => @employers.total_count %>
+		</div>
 	</div>
 	<div class="panel-body">
-		Panel content
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<% ary_yes_no_all = [ ["All", ""], ["Yes", 1], ["No", 0] ] %>
+					<%= form_for :employer, :method => "get", :url => employers_path do |f| %>
+						<th>
+							<%= link_to_bootstrap_glyphicon(new_employer_path, "sm", "success", "New Employer", ["plus"]) %>
+						</th>
+						<th>
+							<!-- Name -->
+							<%= f.label :name %>
+							<br/>
+							<% if params.has_key?(:employer) && params[:employer].has_key?(:name) && !params.has_key?(:btn_employers_reset_filters) %>
+								<%= f.text_field :name, value: params[:employer][:name], class: "form-control input-sm", placeholder: "Enter all or part of a name" %>
+							<% else %>
+								<%= f.text_field :name, class: "form-control input-sm", placeholder: "Enter all or part of a name" %>
+							<% end %>
+						</th>
+						<th>
+							<!-- Is Active -->
+							<%= f.label :is_active, "Is Active" %>
+							<br/>
+							<% if params.has_key?(:employer) && params[:employer].has_key?(:is_active) && !params.has_key?(:btn_employers_reset_filters) %>
+								<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: params[:employer][:is_active]), {}, { :class => "form-control input-sm"} %>
+							<% else %>
+								<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: "1"), {}, { :class => "form-control input-sm"} %>
+							<% end %>
+						</th>
+						<th>
+							<!-- Is Deleted -->
+							<%= f.label :is_deleted, "Is Deleted" %>
+							<br/>
+							<% if params.has_key?(:employer) && params[:employer].has_key?(:is_deleted) && !params.has_key?(:btn_employers_reset_filters) %>
+								<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: params[:employer][:is_deleted]), {}, { :class => "form-control input-sm"}  %>
+							<% else %>
+								<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: "0"), {}, { :class => "form-control input-sm"}  %>
+							<% end %>
+						</th>
+						<th>Created Date</th>
+						<th>Updated Date</th>
+						<th>Deleted Date</th>
+						<th colspan="3">
+							<%= submit_tag "Apply Filters", name: "btn_employers_apply_filters", class: "btn btn-sm btn-primary" %>
+							<%= submit_tag "Reset Filters", name: "btn_employers_reset_filters", class: "btn btn-sm btn-default" %>
+						</th>
+					<% end %>
+				</tr>
+			</thead>
+		
+			<tbody>
+				<% if @employers.total_count == 0 %>
+					<td colspan="10">No records found.</td>
+				<% else %>
+					<% @employers.each_with_index do |employer, employer_current_row| %>
+						<tr>
+							<td><%= (((((params.has_key?(:page) ? params[:page].to_i : 1) - 1) * Kaminari.config.default_per_page) + employer_current_row) + 1) %></td>
+							<td><%= employer.name %></td>
+							<td><%= employer.is_active ? "Yes" : "No" %></td>
+							<td><%= employer.is_deleted ? "Yes" : "No" %></td>
+							<td><%= employer.created_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
+							<td><%= employer.updated_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
+							<td> <%= employer.deleted_at.blank? ? "&nbsp;".html_safe : employer.deleted_at.strftime("%m/%d%Y %l:%M:%S %p") %> </td>
+							<td><%= link_to 'Edit', edit_employer_path(employer) %></td>
+							<td>
+								<% if employer.is_active %>
+									<%= link_to 'Deactivate', deactivate_employer_path(employer), method: :deactivate, data: { confirm: 'Are you sure you want to deactivate this record?' } %>
+								<% else %>
+									<%= link_to 'Activate', activate_employer_path(employer), method: :activate, data: { confirm: 'Are you sure you want to activate this record?' } %>
+								<% end %>
+							</td>
+							<td>
+								<% if !employer.is_deleted %>
+									<%= link_to 'Delete', do_delete_employer_path(employer), method: :do_delete, data: { confirm: 'Are you sure you want to delete this record?' } %>
+								<% else %>
+									<%= link_to 'Undelete', undo_delete_employer_path(employer), method: :undo_delete, data: { confirm: 'Are you sure you want to undelete this record?' } %>
+								<% end %>
+							</td>
+						</tr>
+					<% end %>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="panel-heading">
+		<div class="panel-title">
+			<%= paginate @employers, :total_count => @employers.total_count %>
+		</div>
 	</div>
 </div>
-
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">
-<%= paginate @employers, :total_count => 7 %>
-</h3>
-</div>
-<div class="panel-body">
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<% ary_yes_no_all = [ ["All", ""], ["Yes", 1], ["No", 0] ] %>
-			<%= form_for :employer, :method => "get", :url => employers_path do |f| %>
-				<th>&nbsp;</th>
-				<th>
-					<!-- Name -->
-					<%= f.label :name %>
-					<br/>
-					<% if params.has_key?(:employer) && params[:employer].has_key?(:name) && !params.has_key?(:btn_employers_reset_filters) %>
-						<%= f.text_field :name, value: params[:employer][:name], class: "form-control input-sm", placeholder: "Enter all or part of a name" %>
-					<% else %>
-						<%= f.text_field :name, class: "form-control input-sm", placeholder: "Enter all or part of a name" %>
-					<% end %>
-				</th>
-				<th>
-					<!-- Is Active -->
-					<%= f.label :is_active, "Is Active" %>
-					<br/>
-					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_active) && !params.has_key?(:btn_employers_reset_filters) %>
-						<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: params[:employer][:is_active]), {}, { :class => "form-control input-sm"} %>
-					<% else %>
-						<%= f.select :is_active, options_for_select(ary_yes_no_all, selected: "1"), {}, { :class => "form-control input-sm"} %>
-					<% end %>
-				</th>
-				<th>
-					<!-- Is Deleted -->
-					<%= f.label :is_deleted, "Is Deleted" %>
-					<br/>
-					<% if params.has_key?(:employer) && params[:employer].has_key?(:is_deleted) && !params.has_key?(:btn_employers_reset_filters) %>
-						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: params[:employer][:is_deleted]), {}, { :class => "form-control input-sm"}  %>
-					<% else %>
-						<%= f.select :is_deleted, options_for_select(ary_yes_no_all, selected: "0"), {}, { :class => "form-control input-sm"}  %>
-					<% end %>
-				</th>
-				<th>Created Date</th>
-				<th>Updated Date</th>
-				<th>Deleted Date</th>
-				<th colspan="3">
-					<%= submit_tag "Apply Filters", name: "btn_employers_apply_filters", class: "btn btn-sm btn-default" %>
-					<%= submit_tag "Reset Filters", name: "btn_employers_reset_filters", class: "btn btn-sm btn-default" %>
-				</th>
-			<% end %>
-		</tr>
-	</thead>
-
-	<tbody>
-		<% @employers.each_with_index do |employer, employer_current_row| %>
-			<tr>
-				<td><%= (((((params.has_key?(:page) ? params[:page].to_i : 1) - 1) * Kaminari.config.default_per_page) + employer_current_row) + 1) %></td>
-				<td><%= employer.name %></td>
-				<td><%= employer.is_active ? "Yes" : "No" %></td>
-				<td><%= employer.is_deleted ? "Yes" : "No" %></td>
-				<td><%= employer.created_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
-				<td><%= employer.updated_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
-				<td> <%= employer.deleted_at.blank? ? "&nbsp;".html_safe : employer.deleted_at.strftime("%m/%d%Y %l:%M:%S %p") %> </td>
-				<td><%= link_to 'Edit', edit_employer_path(employer) %></td>
-				<td>
-					<% if employer.is_active %>
-						<%= link_to 'Deactivate', deactivate_employer_path(employer), method: :deactivate, data: { confirm: 'Are you sure you want to deactivate this record?' } %>
-					<% else %>
-						<%= link_to 'Activate', activate_employer_path(employer), method: :activate, data: { confirm: 'Are you sure you want to activate this record?' } %>
-					<% end %>
-				</td>
-				<td>
-					<% if !employer.is_deleted %>
-						<%= link_to 'Delete', do_delete_employer_path(employer), method: :do_delete, data: { confirm: 'Are you sure you want to delete this record?' } %>
-					<% else %>
-						<%= link_to 'Undelete', undo_delete_employer_path(employer), method: :undo_delete, data: { confirm: 'Are you sure you want to undelete this record?' } %>
-					<% end %>
-				</td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
-
-</div>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">
-<%= paginate @employers, :total_count => 7 %>
-</h3>
-</div>
-</div>
-
-<br>
-
-<%= link_to 'New Employer', new_employer_path %>

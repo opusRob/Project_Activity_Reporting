@@ -28,15 +28,12 @@ class EmployersController < ApplicationController
 			end
 
 			if employer_filter_params.has_key?(:name) || employer_filter_params.has_key?(:is_active) || employer_filter_params.has_key?(:is_deleted)
-				# @employers = Employer.where(employer_filter_string, employer_filter_params).paginate(:page => page)
-				@employers = Employer.where(employer_filter_string, employer_filter_params).page(page)
+				@employers = Employer.where(employer_filter_string, employer_filter_params).order(name: :asc, created_at: :desc).page(page)
 			else
-				# @employers = Employer.all.paginate(:page => page)
-				@employers = Employer.all.page(page)
+				@employers = Employer.all.order(name: :asc, created_at: :desc).page(page)
 			end
 		else
-			# @employers = Employer.where({is_active: true, is_deleted: false}).paginate(:page => page)
-			@employers = Employer.where({is_active: true, is_deleted: false}).page(page)
+			@employers = Employer.where({is_active: true, is_deleted: false}).order(name: :asc, created_at: :desc).page(page)
 		end
 		
 	end
