@@ -19,7 +19,26 @@ input {
 	font-weight: normal; 
 	height: auto; 
 } 
+table th {
+	vertical-align: middle; 
+}
 
-// select option {
-	// font-weight: normal; 
-// }
+.pagination {
+	margin: 0px; 
+	font-size: 14px; 
+	float: right; 
+}
+.records_found {
+	font-size: 15px; 
+	float: left; 
+}
+
+.panel-heading {
+	padding: 8px 5px 5px 5px; 
+	overflow: hidden; 
+}
+
+.panel-body {
+	padding-top: 5px;
+	padding-bottom: 5px; 
+}
