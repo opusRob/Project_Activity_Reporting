@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Task or story identifier:</strong>
+  <%= @task.task_or_story_identifier %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @task.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @task.description %>
+</p>
+
+<p>
+  <strong>Task type:</strong>
+  <%= @task.task_type %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @task.created_by %>
+</p>
+
+<p>
+  <strong>Updated by:</strong>
+  <%= @task.updated_by %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @task.is_active %>
+</p>
+
+<p>
+  <strong>Is deleted:</strong>
+  <%= @task.is_deleted %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @task.deleted_at %>
+</p>
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>

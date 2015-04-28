@@ -1,0 +1,35 @@
+<h1>Listing report_statuses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Is editable</th>
+      <th>Is active</th>
+      <th>Is deleted</th>
+      <th>Deleted at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @report_statuses.each do |report_status| %>
+      <tr>
+        <td><%= report_status.name %></td>
+        <td><%= report_status.description %></td>
+        <td><%= report_status.is_editable %></td>
+        <td><%= report_status.is_active %></td>
+        <td><%= report_status.is_deleted %></td>
+        <td><%= report_status.deleted_at %></td>
+        <td><%= link_to 'Show', report_status %></td>
+        <td><%= link_to 'Edit', edit_report_status_path(report_status) %></td>
+        <td><%= link_to 'Destroy', report_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Report status', new_report_status_path %>

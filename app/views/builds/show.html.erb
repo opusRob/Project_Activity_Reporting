@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @build.name %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @build.is_active %>
+</p>
+
+<p>
+  <strong>Is deleted:</strong>
+  <%= @build.is_deleted %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @build.deleted_at %>
+</p>
+
+<%= link_to 'Edit', edit_build_path(@build) %> |
+<%= link_to 'Back', builds_path %>

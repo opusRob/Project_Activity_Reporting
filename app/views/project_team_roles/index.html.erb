@@ -1,0 +1,35 @@
+<h1>Listing project_team_roles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Project team</th>
+      <th>Is active</th>
+      <th>Is deleted</th>
+      <th>Deleted at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_team_roles.each do |project_team_role| %>
+      <tr>
+        <td><%= project_team_role.name %></td>
+        <td><%= project_team_role.description %></td>
+        <td><%= project_team_role.project_team %></td>
+        <td><%= project_team_role.is_active %></td>
+        <td><%= project_team_role.is_deleted %></td>
+        <td><%= project_team_role.deleted_at %></td>
+        <td><%= link_to 'Show', project_team_role %></td>
+        <td><%= link_to 'Edit', edit_project_team_role_path(project_team_role) %></td>
+        <td><%= link_to 'Destroy', project_team_role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project team role', new_project_team_role_path %>

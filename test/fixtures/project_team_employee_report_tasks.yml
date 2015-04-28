@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_team_employee_report_id: 
+  work_date: 2015-04-27
+  work_hours: 9.99
+  task_id: 
+  application_id: 
+  release_id: 
+  build_id: 
+  created_by: MyString
+  updated_by: MyString
+
+two:
+  project_team_employee_report_id: 
+  work_date: 2015-04-27
+  work_hours: 9.99
+  task_id: 
+  application_id: 
+  release_id: 
+  build_id: 
+  created_by: MyString
+  updated_by: MyString

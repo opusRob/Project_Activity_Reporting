@@ -1,0 +1,41 @@
+<%= form_for(@system_role) do |f| %>
+  <% if @system_role.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@system_role.errors.count, "error") %> prohibited this system_role from being saved:</h2>
+
+      <ul>
+      <% @system_role.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :is_editable %><br>
+    <%= f.check_box :is_editable %>
+  </div>
+  <div class="field">
+    <%= f.label :is_active %><br>
+    <%= f.check_box :is_active %>
+  </div>
+  <div class="field">
+    <%= f.label :is_deleted %><br>
+    <%= f.check_box :is_deleted %>
+  </div>
+  <div class="field">
+    <%= f.label :deleted_at %><br>
+    <%= f.date_select :deleted_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

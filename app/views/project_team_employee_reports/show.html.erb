@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project_team_employee_report.name %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @project_team_employee_report.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @project_team_employee_report.end_date %>
+</p>
+
+<p>
+  <strong>Report status:</strong>
+  <%= @project_team_employee_report.report_status %>
+</p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @project_team_employee_report.employee %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @project_team_employee_report.project %>
+</p>
+
+<p>
+  <strong>Project team:</strong>
+  <%= @project_team_employee_report.project_team %>
+</p>
+
+<p>
+  <strong>Project team role:</strong>
+  <%= @project_team_employee_report.project_team_role %>
+</p>
+
+<%= link_to 'Edit', edit_project_team_employee_report_path(@project_team_employee_report) %> |
+<%= link_to 'Back', project_team_employee_reports_path %>

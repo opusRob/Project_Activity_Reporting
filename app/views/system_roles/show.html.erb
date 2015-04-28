@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @system_role.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @system_role.description %>
+</p>
+
+<p>
+  <strong>Is editable:</strong>
+  <%= @system_role.is_editable %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @system_role.is_active %>
+</p>
+
+<p>
+  <strong>Is deleted:</strong>
+  <%= @system_role.is_deleted %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @system_role.deleted_at %>
+</p>
+
+<%= link_to 'Edit', edit_system_role_path(@system_role) %> |
+<%= link_to 'Back', system_roles_path %>

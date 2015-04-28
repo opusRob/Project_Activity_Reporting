@@ -18,7 +18,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: { deleted_at: @user.deleted_at, employer_id: @user.employer_id, first_name: @user.first_name, is_active: @user.is_active, is_deleted: @user.is_deleted, last_name: @user.last_name, password: @user.password, password_last_updated_at: @user.password_last_updated_at, role_id: @user.role_id, username: @user.username }
+      post :create, user: { deleted_at: @user.deleted_at, employee: @user.employee, is_active: @user.is_active, is_deleted: @user.is_deleted, password: @user.password, password_last_updated_at: @user.password_last_updated_at, username: @user.username }
     end
 
     assert_redirected_to user_path(assigns(:user))
@@ -35,7 +35,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update user" do
-    patch :update, id: @user, user: { deleted_at: @user.deleted_at, employer_id: @user.employer_id, first_name: @user.first_name, is_active: @user.is_active, is_deleted: @user.is_deleted, last_name: @user.last_name, password: @user.password, password_last_updated_at: @user.password_last_updated_at, role_id: @user.role_id, username: @user.username }
+    patch :update, id: @user, user: { deleted_at: @user.deleted_at, employee: @user.employee, is_active: @user.is_active, is_deleted: @user.is_deleted, password: @user.password, password_last_updated_at: @user.password_last_updated_at, username: @user.username }
     assert_redirected_to user_path(assigns(:user))
   end
 

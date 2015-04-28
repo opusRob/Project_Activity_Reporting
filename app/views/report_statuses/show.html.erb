@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @report_status.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @report_status.description %>
+</p>
+
+<p>
+  <strong>Is editable:</strong>
+  <%= @report_status.is_editable %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @report_status.is_active %>
+</p>
+
+<p>
+  <strong>Is deleted:</strong>
+  <%= @report_status.is_deleted %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @report_status.deleted_at %>
+</p>
+
+<%= link_to 'Edit', edit_report_status_path(@report_status) %> |
+<%= link_to 'Back', report_statuses_path %>

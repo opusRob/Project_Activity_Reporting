@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task_or_story_identifier: MyString
+  name: MyString
+  description: MyText
+  task_type_id: 
+  created_by: MyString
+  updated_by: MyString
+  is_active: false
+  is_deleted: false
+  deleted_at: 2015-04-27
+
+two:
+  task_or_story_identifier: MyString
+  name: MyString
+  description: MyText
+  task_type_id: 
+  created_by: MyString
+  updated_by: MyString
+  is_active: false
+  is_deleted: false
+  deleted_at: 2015-04-27

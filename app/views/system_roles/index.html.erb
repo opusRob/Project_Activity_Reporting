@@ -1,0 +1,35 @@
+<h1>Listing system_roles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Is editable</th>
+      <th>Is active</th>
+      <th>Is deleted</th>
+      <th>Deleted at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @system_roles.each do |system_role| %>
+      <tr>
+        <td><%= system_role.name %></td>
+        <td><%= system_role.description %></td>
+        <td><%= system_role.is_editable %></td>
+        <td><%= system_role.is_active %></td>
+        <td><%= system_role.is_deleted %></td>
+        <td><%= system_role.deleted_at %></td>
+        <td><%= link_to 'Show', system_role %></td>
+        <td><%= link_to 'Edit', edit_system_role_path(system_role) %></td>
+        <td><%= link_to 'Destroy', system_role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New System role', new_system_role_path %>

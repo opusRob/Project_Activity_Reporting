@@ -1,4 +1,40 @@
 Rails.application.routes.draw do
+  resources :project_team_employee_report_tasks
+
+  resources :project_team_employee_reports
+
+  resources :tasks
+
+  resources :task_types
+
+  resources :builds
+
+  resources :releases
+
+  resources :applications
+
+  resources :report_statuses
+
+  resources :project_team_employees
+
+  resources :project_team_roles
+
+  resources :project_teams
+
+  resources :project_organizations
+
+  resources :project_organization_types
+
+  resources :projects
+
+  resources :system_roles
+
+  resources :users
+
+  resources :employees
+
+  resources :organizations
+
 	get 'home/index'
 
 	resources :users

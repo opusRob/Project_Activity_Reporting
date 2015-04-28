@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  start_date: 2015-04-27
+  end_date: 2015-04-27
+  report_status_id: 
+  employee_id: 
+  employee_type: Employee
+  project_id: 
+  project_type: Project
+  project_team_id: 
+  project_team_type: Project team
+  project_team_role_id: 
+  project_team_role_type: Project team role
+
+two:
+  name: MyString
+  start_date: 2015-04-27
+  end_date: 2015-04-27
+  report_status_id: 
+  employee_id: 
+  employee_type: Employee
+  project_id: 
+  project_type: Project
+  project_team_id: 
+  project_team_type: Project team
+  project_team_role_id: 
+  project_team_role_type: Project team role

@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Project team employee report:</strong>
+  <%= @project_team_employee_report_task.project_team_employee_report %>
+</p>
+
+<p>
+  <strong>Work date:</strong>
+  <%= @project_team_employee_report_task.work_date %>
+</p>
+
+<p>
+  <strong>Work hours:</strong>
+  <%= @project_team_employee_report_task.work_hours %>
+</p>
+
+<p>
+  <strong>Task:</strong>
+  <%= @project_team_employee_report_task.task %>
+</p>
+
+<p>
+  <strong>Application:</strong>
+  <%= @project_team_employee_report_task.application %>
+</p>
+
+<p>
+  <strong>Release:</strong>
+  <%= @project_team_employee_report_task.release %>
+</p>
+
+<p>
+  <strong>Build:</strong>
+  <%= @project_team_employee_report_task.build %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @project_team_employee_report_task.created_by %>
+</p>
+
+<p>
+  <strong>Updated by:</strong>
+  <%= @project_team_employee_report_task.updated_by %>
+</p>
+
+<%= link_to 'Edit', edit_project_team_employee_report_task_path(@project_team_employee_report_task) %> |
+<%= link_to 'Back', project_team_employee_report_tasks_path %>

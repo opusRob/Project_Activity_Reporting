@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @release.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @release.description %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @release.is_active %>
+</p>
+
+<p>
+  <strong>Is deleted:</strong>
+  <%= @release.is_deleted %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @release.deleted_at %>
+</p>
+
+<%= link_to 'Edit', edit_release_path(@release) %> |
+<%= link_to 'Back', releases_path %>

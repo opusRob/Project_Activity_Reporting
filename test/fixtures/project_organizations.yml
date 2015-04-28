@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_id: 
+  project_type: Project
+  organization_id: 
+  organization_type: Organization
+  project_organization_: MyString
+
+two:
+  project_id: 
+  project_type: Project
+  organization_id: 
+  organization_type: Organization
+  project_organization_: MyString

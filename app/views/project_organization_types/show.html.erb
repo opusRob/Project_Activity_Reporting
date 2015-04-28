@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project_organization_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project_organization_type.description %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @project_organization_type.is_active %>
+</p>
+
+<p>
+  <strong>Is deleted:</strong>
+  <%= @project_organization_type.is_deleted %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @project_organization_type.deleted_at %>
+</p>
+
+<%= link_to 'Edit', edit_project_organization_type_path(@project_organization_type) %> |
+<%= link_to 'Back', project_organization_types_path %>

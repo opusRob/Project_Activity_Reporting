@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project_team_role.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project_team_role.description %>
+</p>
+
+<p>
+  <strong>Project team:</strong>
+  <%= @project_team_role.project_team %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @project_team_role.is_active %>
+</p>
+
+<p>
+  <strong>Is deleted:</strong>
+  <%= @project_team_role.is_deleted %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @project_team_role.deleted_at %>
+</p>
+
+<%= link_to 'Edit', edit_project_team_role_path(@project_team_role) %> |
+<%= link_to 'Back', project_team_roles_path %>

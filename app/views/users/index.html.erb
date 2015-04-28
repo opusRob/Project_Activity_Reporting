@@ -5,11 +5,8 @@
     <tr>
       <th>Username</th>
       <th>Password</th>
-      <th>First name</th>
-      <th>Last name</th>
       <th>Password last updated at</th>
-      <th>Employer</th>
-      <th>Role</th>
+      <th>Employee</th>
       <th>Is active</th>
       <th>Is deleted</th>
       <th>Deleted at</th>
@@ -22,18 +19,11 @@
       <tr>
         <td><%= user.username %></td>
         <td><%= user.password %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
         <td><%= user.password_last_updated_at %></td>
-        <td><%= user.employer_id %></td>
-        <td><%= user.role_id %></td>
-        <td><%= user.is_active ? "Yes" : "No" %></td>
-        <td><%= user.is_deleted ? "Yes" : "No" %></td>
-        <td><%= user.created_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
-        <td><%= user.updated_at.strftime("%m/%d%Y %l:%M:%S %p") %></td>
-        <td>
-        	<%= user.deleted_at.blank? ? "&nbsp;".html_safe : user.deleted_at.strftime("%m/%d%Y %l:%M:%S %p") %>
-        </td>
+        <td><%= user.employee %></td>
+        <td><%= user.is_active %></td>
+        <td><%= user.is_deleted %></td>
+        <td><%= user.deleted_at %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
