@@ -3,12 +3,14 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
+gem 'sass-rails', '>= 5.0'
+gem 'bootstrap-sass', '~> 3.3.4.1'
+gem 'uglifier', '>= 1.3.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 # gem 'coffee-rails', '~> 4.0.0'
 # gem 'coffee-script-source', '1.8.0'
@@ -42,20 +44,18 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
-gem 'execjs'
-gem "bower-rails", "~> 0.9.2"
+# gem 'execjs'
+# gem "bower-rails", "~> 0.9.2"
 
 gem 'foreigner' 
 
 # gem 'will_paginate', '~> 3.0.6'
 gem 'kaminari'
 
-gem 'requirejs-rails'
-gem 'sprockets-rails', :require => 'sprockets/railtie'
-gem 'sprockets-commonjs'
-gem 'bootstrap-sass', '~> 3.3.4.1'
-gem 'autoprefixer-rails'
-gem 'sass-rails', '>= 5.0'
-
-gem "twitter-bootstrap-rails"
-gem 'hsume2-browserify-rails', '~> 0.2.1', :require => 'browserify-rails'
+# gem 'requirejs-rails'
+# gem 'sprockets-rails', :require => 'sprockets/railtie'
+# gem 'sprockets-commonjs'
+# gem 'autoprefixer-rails'
+# 
+# gem "twitter-bootstrap-rails"
+# gem 'hsume2-browserify-rails', '~> 0.2.1', :require => 'browserify-rails'

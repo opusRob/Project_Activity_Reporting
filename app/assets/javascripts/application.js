@@ -12,15 +12,8 @@
 //
 //= require jquery
 // require jquery_ujs
-//= require twitter/bootstrap
+// require twitter/bootstrap
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-sprockets
 //= require_tree .
-var foo = require('./foo');
-
-var $ = require('jquery-browserify');
-
-$('document').ready(function() {
-  $('#root').html("It works! " + foo(11));
-});
