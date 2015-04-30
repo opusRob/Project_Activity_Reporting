@@ -1,0 +1,3 @@
+require('./baz');
+
+alert('bar');

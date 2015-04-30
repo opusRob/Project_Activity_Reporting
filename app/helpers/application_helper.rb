@@ -1,4 +1,13 @@
 module ApplicationHelper
+	def bootstrap_glyphicon(glyphicons)
+		# Available options:  text_start, text_end.
+		generated_html = ""
+		glyphicons.each do |glyphicon|
+			generated_html += '<span class="glyphicon glyphicon-' + glyphicon + '" aria-hidden="true"></span>'
+		end
+		raw(generated_html)
+	end
+	
 	def link_to_bootstrap_glyphicon(path, size, type, title, glyphicons, options = {}, link_html_options = {})
 		# Available options:  text_start, text_end.
 		link_to path, class: "btn btn-#{size} btn-#{type}", title: title, "aria-label" => title, html_options: link_html_options do

@@ -50,8 +50,12 @@ gem 'foreigner'
 # gem 'will_paginate', '~> 3.0.6'
 gem 'kaminari'
 
+gem 'requirejs-rails'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'sprockets-commonjs'
 gem 'bootstrap-sass', '~> 3.3.4.1'
 gem 'autoprefixer-rails'
 gem 'sass-rails', '>= 5.0'
 
 gem "twitter-bootstrap-rails"
+gem 'hsume2-browserify-rails', '~> 0.2.1', :require => 'browserify-rails'

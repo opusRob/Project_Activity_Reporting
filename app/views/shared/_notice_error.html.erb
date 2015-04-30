@@ -1,0 +1,15 @@
+
+<% if notice_errors.any? %>
+	<div id="error_explanation" class="alert alert-danger" role="alert">
+		<%= bootstrap_glyphicon ["alert"] %>
+		<strong><%= pluralize(notice_errors.count, "error") %> prohibited this <%= notice_label %> from being saved:</strong>
+	
+		<ul>
+			<% notice_errors.full_messages.each do |message| %>
+			<li>
+				<%= message %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>

@@ -1,5 +1,7 @@
 <h1>New Employer</h1>
 
+<%= render partial: "shared/notice_saved" %>
+<%= render partial: "shared/notice_error", locals: {notice_errors: @employer.errors, notice_label: "employer"} %>
 
 <div class="panel panel-default">
 	<div class="panel-heading">

@@ -1,0 +1,14 @@
+{
+  "name": "browserify-rails-sample",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery-browserify": "*"
+  },
+  "devDependencies" : {
+    "browserify": "~> 3.33"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.6"
+  }
+}

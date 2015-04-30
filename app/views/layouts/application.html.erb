@@ -8,11 +8,79 @@
 		<title>Project Activity Reporting</title>
 		
 		<%= render 'layouts/shim' %>		
-		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
 		<!-- %= stylesheet_link_tag "bootstrap" %
 		%= javascript_include_tag "bootstrap" % -->
-		<%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.js?body=1"></script> -->
+		
+		
+		<!-- %= javascript_include_tag "assets/jquery.self" %
+		%= javascript_include_tag "assets/bootstrap.self" % -->
 		<%= javascript_include_tag "application" %>
+		
+		
+		
+		<!-- <script src="/javascripts/assets/jquery.self.js"></script>
+		<script src="/javascripts/assets/bootstrap.self.js"></script> -->
+		<!-- <script src="/assets/jquery.js?body=1"></script>
+		<script src="/assets/bootstrap.js?body=1"></script>
+		<script src="/assets/bootstrap-sprockets.js?body=1"></script>
+		<script src="/assets/npm.js?body=1"></script>
+		<script src="/assets/turbolinks.js?body=1"></script>
+		
+		<script src="/assets/twitter/bootstrap/transition.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap/alert.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap/modal.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap/dropdown.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap/scrollspy.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap/tab.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap/tooltip.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap/popover.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap/button.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap/collapse.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap/carousel.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap/affix.js?body=1"></script>
+		<script src="/assets/twitter/bootstrap.js?body=1"></script>
+		<script src="/assets/bootstrap/affix.js?body=1"></script>
+		<script src="/assets/bootstrap/alert.js?body=1"></script>
+		<script src="/assets/bootstrap/button.js?body=1"></script>
+		<script src="/assets/bootstrap/carousel.js?body=1"></script>
+		<script src="/assets/bootstrap/collapse.js?body=1"></script>
+		<script src="/assets/bootstrap/dropdown.js?body=1"></script>
+		<script src="/assets/bootstrap/modal.js?body=1"></script>
+		<script src="/assets/bootstrap/scrollspy.js?body=1"></script>
+		<script src="/assets/bootstrap/tab.js?body=1"></script>
+		<script src="/assets/bootstrap/transition.js?body=1"></script>
+		<script src="/assets/bootstrap/tooltip.js?body=1"></script>
+		<script src="/assets/bootstrap/popover.js?body=1"></script>
+		
+		<script src="/assets/applications.js?body=1"></script>
+		<script src="/assets/builds.js?body=1"></script>
+		<script src="/assets/employees.js?body=1"></script>
+		<script src="/assets/employers.js?body=1"></script>
+		<script src="/assets/home.js?body=1"></script>
+		<script src="/assets/organizations.js?body=1"></script>
+		<script src="/assets/project_organization_types.js?body=1"></script>
+		<script src="/assets/project_organizations.js?body=1"></script>
+		<script src="/assets/project_team_employee_report_tasks.js?body=1"></script>
+		<script src="/assets/project_team_employee_reports.js?body=1"></script>
+		<script src="/assets/project_team_employees.js?body=1"></script>
+		<script src="/assets/project_team_roles.js?body=1"></script>
+		<script src="/assets/project_teams.js?body=1"></script>
+		<script src="/assets/projects.js?body=1"></script>
+		<script src="/assets/releases.js?body=1"></script>
+		<script src="/assets/report_statuses.js?body=1"></script>
+		<script src="/assets/system_roles.js?body=1"></script>
+		<script src="/assets/task_types.js?body=1"></script>
+		<script src="/assets/tasks.js?body=1"></script>
+		<script src="/assets/users.js?body=1"></script>
+		<script src="/assets/application.js?body=1"></script> -->
+
+		
+		
+		
+		
+		
 		<%= csrf_meta_tags %>
 		
 	</head>
@@ -27,13 +95,19 @@
 					<ul class="nav navbar-nav">
 						<% current_controller = params.has_key?(:controller) ? params[:controller] : '' %>
 						<li class="<%= current_controller == 'employers' ? 'active' : '' %>"><%= link_to "Employers", employers_path %></li>
-						<li class="<%= current_controller == 'roles' ? 'active' : '' %>"><%= link_to "Roles", roles_path %></li>
-						<li class="<%= current_controller == 'users' ? 'active' : '' %>"><%= link_to "Users", users_path %></li>
+						<li class="dropdown <%= current_controller == 'organizations' ? 'active' : '' %>">
+							<!-- %= link_to "Organizations", roles_path % -->
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Organizations <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li class="<%= current_controller == 'organizations' ? 'active' : '' %>"><%= link_to "Organizations", organizations_path %></li>
+								<li class="<%= current_controller == 'employees' ? 'active' : '' %>"><%= link_to "Employees", employees_path %></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
-		
+
 		<div class="container theme-showcase" role="main">
 			<%= yield %>
 		</div>

@@ -1,6 +1,7 @@
 class CreateTasks < ActiveRecord::Migration
   def change
     create_table :tasks do |t|
+      t.references :project, polymorphic: true, index: true
       t.string :task_or_story_identifier
       t.string :name
       t.text :description
@@ -13,6 +14,7 @@ class CreateTasks < ActiveRecord::Migration
 
       t.timestamps
       
+      t.foreign_key :projects
       t.foreign_key :task_types
       t.foreign_key :users, column: :created_by_user_id
       t.foreign_key :users, column: :updated_by_user_id

@@ -1,6 +1,7 @@
 class CreateApplications < ActiveRecord::Migration
   def change
     create_table :applications do |t|
+      t.references :project, polymorphic: true, index: true
       t.string :name
       t.string :short_name
       t.text :description
@@ -9,6 +10,8 @@ class CreateApplications < ActiveRecord::Migration
       t.date :deleted_at
 
       t.timestamps
+      
+      t.foreign_key :projects
     end
   end
 end
