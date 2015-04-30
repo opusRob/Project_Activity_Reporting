@@ -7,78 +7,9 @@
 	    
 		<title>Project Activity Reporting</title>
 		
-		<%= render 'layouts/shim' %>		
-		<!-- %= stylesheet_link_tag "bootstrap" %
-		%= javascript_include_tag "bootstrap" % -->
+		<%= render 'layouts/shim' %>
 		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.js?body=1"></script> -->
-		
-		
-		<!-- %= javascript_include_tag "assets/jquery.self" %
-		%= javascript_include_tag "assets/bootstrap.self" % -->
 		<%= javascript_include_tag "application" %>
-		
-<!-- <script src="/assets/jquery.js?body=1"></script> -->
-<!-- <script src="/assets/twitter/bootstrap/transition.js?body=1"></script>
-<script src="/assets/twitter/bootstrap/alert.js?body=1"></script>
-<script src="/assets/twitter/bootstrap/modal.js?body=1"></script>
-<script src="/assets/twitter/bootstrap/dropdown.js?body=1"></script>
-<script src="/assets/twitter/bootstrap/scrollspy.js?body=1"></script>
-<script src="/assets/twitter/bootstrap/tab.js?body=1"></script>
-<script src="/assets/twitter/bootstrap/tooltip.js?body=1"></script>
-<script src="/assets/twitter/bootstrap/popover.js?body=1"></script>
-<script src="/assets/twitter/bootstrap/button.js?body=1"></script>
-<script src="/assets/twitter/bootstrap/collapse.js?body=1"></script>
-<script src="/assets/twitter/bootstrap/carousel.js?body=1"></script>
-<script src="/assets/twitter/bootstrap/affix.js?body=1"></script>
-<script src="/assets/twitter/bootstrap.js?body=1"></script> -->
-<!-- <script src="/assets/turbolinks.js?body=1"></script>
-<script src="/assets/bootstrap.js?body=1"></script>
-<script src="/assets/bootstrap/affix.js?body=1"></script>
-<script src="/assets/bootstrap/alert.js?body=1"></script>
-<script src="/assets/bootstrap/button.js?body=1"></script>
-<script src="/assets/bootstrap/carousel.js?body=1"></script>
-<script src="/assets/bootstrap/collapse.js?body=1"></script>
-<script src="/assets/bootstrap/dropdown.js?body=1"></script>
-<script src="/assets/bootstrap/modal.js?body=1"></script>
-<script src="/assets/bootstrap/scrollspy.js?body=1"></script>
-<script src="/assets/bootstrap/tab.js?body=1"></script>
-<script src="/assets/bootstrap/transition.js?body=1"></script>
-<script src="/assets/bootstrap/tooltip.js?body=1"></script>
-<script src="/assets/bootstrap/popover.js?body=1"></script>
-<script src="/assets/bootstrap-sprockets.js?body=1"></script>
-
-<script src="/assets/foo.js?body=1"></script>
-<script src="/assets/bar.js?body=1"></script>
-<script src="/assets/baz.js?body=1"></script>
-
-<script src="/assets/require.js?body=1"></script>
-<script src="/assets/npm.js?body=1"></script>
-
-<script src="/assets/applications.js?body=1"></script>
-<script src="/assets/builds.js?body=1"></script>
-<script src="/assets/employees.js?body=1"></script>
-<script src="/assets/employers.js?body=1"></script>
-<script src="/assets/home.js?body=1"></script>
-<script src="/assets/organizations.js?body=1"></script>
-<script src="/assets/project_organization_types.js?body=1"></script>
-<script src="/assets/project_organizations.js?body=1"></script>
-<script src="/assets/project_team_employee_report_tasks.js?body=1"></script>
-<script src="/assets/project_team_employee_reports.js?body=1"></script>
-<script src="/assets/project_team_employees.js?body=1"></script>
-<script src="/assets/project_team_roles.js?body=1"></script>
-<script src="/assets/project_teams.js?body=1"></script>
-<script src="/assets/projects.js?body=1"></script>
-<script src="/assets/releases.js?body=1"></script>
-<script src="/assets/report_statuses.js?body=1"></script>
-<script src="/assets/system_roles.js?body=1"></script>
-<script src="/assets/task_types.js?body=1"></script>
-<script src="/assets/tasks.js?body=1"></script>
-<script src="/assets/users.js?body=1"></script>
-<script src="/assets/application.js?body=1"></script> -->
-		
-		
-		
 		<%= csrf_meta_tags %>
 		
 	</head>
@@ -94,11 +25,44 @@
 						<% current_controller = params.has_key?(:controller) ? params[:controller] : '' %>
 						<li class="<%= current_controller == 'employers' ? 'active' : '' %>"><%= link_to "Employers", employers_path %></li>
 						<li class="dropdown <%= current_controller == 'organizations' ? 'active' : '' %>">
-							<!-- %= link_to "Organizations", roles_path % -->
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Organizations <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li class="<%= current_controller == 'organizations' ? 'active' : '' %>"><%= link_to "Organizations", organizations_path %></li>
 								<li class="<%= current_controller == 'employees' ? 'active' : '' %>"><%= link_to "Employees", employees_path %></li>
+							</ul>
+						</li>
+						<li class="dropdown <%= current_controller == 'users' ? 'active' : '' %>">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Users <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li class="<%= current_controller == 'users' ? 'active' : '' %>"><%= link_to "Users", users_path %></li>
+								<li class="divider"></li>
+								<li class="<%= current_controller == 'system_roles' ? 'active' : '' %>"><%= link_to "System Roles", system_roles_path %></li>
+							</ul>
+						</li>
+						<li class="dropdown <%= current_controller == 'Projects' ? 'active' : '' %>">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li class="<%= current_controller == 'projects' ? 'active' : '' %>"><%= link_to "Projects", projects_path %></li>
+								<li class="<%= current_controller == 'project_organizations' ? 'active' : '' %>"><%= link_to "Project Organizations", project_organizations_path %></li>
+								<li class="<%= current_controller == 'project_organization_types' ? 'active' : '' %>"><%= link_to "Project Organization Types", project_organization_types_path %></li>
+								<li class="<%= current_controller == 'project_teams' ? 'active' : '' %>"><%= link_to "Project Teams", project_teams_path %></li>
+								<li class="<%= current_controller == 'project_team_employees' ? 'active' : '' %>"><%= link_to "Project Team Employees", project_team_employees_path %></li>
+								<li class="divider"></li>
+								<li class="<%= current_controller == 'project_team_roles' ? 'active' : '' %>"><%= link_to "Project Team Roles", project_team_roles_path %></li>
+								<li class="<%= current_controller == 'report_statuses' ? 'active' : '' %>"><%= link_to "Report Statuses", report_statuses_path %></li>
+								<li class="divider"></li>
+								<li class="<%= current_controller == 'applications' ? 'active' : '' %>"><%= link_to "Applications", applications_path %></li>
+								<li class="<%= current_controller == 'releases' ? 'active' : '' %>"><%= link_to "Releases", releases_path %></li>
+								<li class="<%= current_controller == 'builds' ? 'active' : '' %>"><%= link_to "Builds", builds_path %></li>
+								<li class="<%= current_controller == 'tasks' ? 'active' : '' %>"><%= link_to "Tasks", tasks_path %></li>
+								<li class="<%= current_controller == 'task_types' ? 'active' : '' %>"><%= link_to "Task Types", task_types_path %></li>
+							</ul>
+						</li>
+						<li class="dropdown <%= current_controller == 'project_team_employee_reports' ? 'active' : '' %>">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Project Team Employee Reports <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li class="<%= current_controller == 'project_team_employee_reports' ? 'active' : '' %>"><%= link_to "Project Team Employee Reports", project_team_employee_reports_path %></li>
+								<li class="<%= current_controller == 'project_team_employee_report_tasks' ? 'active' : '' %>"><%= link_to "Project Team Employee Report Tasks", project_team_employee_report_tasks_path %></li>
 							</ul>
 						</li>
 					</ul>
