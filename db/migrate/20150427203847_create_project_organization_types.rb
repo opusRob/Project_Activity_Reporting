@@ -5,7 +5,7 @@ class CreateProjectOrganizationTypes < ActiveRecord::Migration
       t.text :description
       t.boolean :is_active
       t.boolean :is_deleted
-      t.date :deleted_at
+      t.datetime :deleted_at
 
       t.timestamps
     end

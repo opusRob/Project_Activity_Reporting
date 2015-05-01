@@ -6,7 +6,7 @@ class CreateProjectTeamRoles < ActiveRecord::Migration
       t.references :project_team, polymorphic: true, index: {name: "index_project_team_roles_on_proj_team_id_and_proj_team_type"}
       t.boolean :is_active
       t.boolean :is_deleted
-      t.date :deleted_at
+      t.datetime :deleted_at
 
       t.timestamps
       

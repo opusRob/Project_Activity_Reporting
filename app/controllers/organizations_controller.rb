@@ -4,7 +4,10 @@ class OrganizationsController < ApplicationController
   # GET /organizations
   # GET /organizations.json
   def index
-    @organizations = Organization.all
+  	
+  	page = params.has_key?(:page) ? params[:page] : 1
+  	# @employers = Employer.where({is_active: true, is_deleted: false}).order(name: :asc, created_at: :desc).page(page)
+    @organizations = Organization.all.page(page)
   end
 
   # GET /organizations/1

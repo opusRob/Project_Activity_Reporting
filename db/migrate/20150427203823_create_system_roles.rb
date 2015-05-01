@@ -6,7 +6,7 @@ class CreateSystemRoles < ActiveRecord::Migration
       t.boolean :is_editable
       t.boolean :is_active
       t.boolean :is_deleted
-      t.date :deleted_at
+      t.datetime :deleted_at
 
       t.timestamps
     end

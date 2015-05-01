@@ -17,24 +17,32 @@ ActiveRecord::Schema.define(version: 20150427204134) do
   enable_extension "plpgsql"
 
   create_table "applications", force: true do |t|
+    t.integer  "project_id"
+    t.string   "project_type"
     t.string   "name"
     t.string   "short_name"
     t.text     "description"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "applications", ["project_id", "project_type"], name: "index_applications_on_project_id_and_project_type", using: :btree
+
   create_table "builds", force: true do |t|
+    t.integer  "project_id"
+    t.string   "project_type"
     t.string   "name"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "builds", ["project_id", "project_type"], name: "index_builds_on_project_id_and_project_type", using: :btree
 
   create_table "employees", force: true do |t|
     t.string   "first_name"
@@ -61,7 +69,7 @@ ActiveRecord::Schema.define(version: 20150427204134) do
     t.string   "name"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,7 +79,7 @@ ActiveRecord::Schema.define(version: 20150427204134) do
     t.text     "description"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -158,7 +166,7 @@ ActiveRecord::Schema.define(version: 20150427204134) do
     t.string   "project_team_type"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -171,7 +179,7 @@ ActiveRecord::Schema.define(version: 20150427204134) do
     t.string   "project_type"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -183,31 +191,39 @@ ActiveRecord::Schema.define(version: 20150427204134) do
     t.text     "description"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "releases", force: true do |t|
+    t.integer  "project_id"
+    t.string   "project_type"
     t.string   "name"
     t.text     "description"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "releases", ["project_id", "project_type"], name: "index_releases_on_project_id_and_project_type", using: :btree
+
   create_table "report_statuses", force: true do |t|
+    t.integer  "project_id"
+    t.string   "project_type"
     t.string   "name"
     t.text     "description"
     t.boolean  "is_editable"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "report_statuses", ["project_id", "project_type"], name: "index_report_statuses_on_project_id_and_project_type", using: :btree
 
   create_table "system_roles", force: true do |t|
     t.string   "name"
@@ -215,22 +231,28 @@ ActiveRecord::Schema.define(version: 20150427204134) do
     t.boolean  "is_editable"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "task_types", force: true do |t|
+    t.integer  "project_id"
+    t.string   "project_type"
     t.string   "name"
     t.text     "description"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "task_types", ["project_id", "project_type"], name: "index_task_types_on_project_id_and_project_type", using: :btree
+
   create_table "tasks", force: true do |t|
+    t.integer  "project_id"
+    t.string   "project_type"
     t.string   "task_or_story_identifier"
     t.string   "name"
     t.text     "description"
@@ -239,12 +261,13 @@ ActiveRecord::Schema.define(version: 20150427204134) do
     t.integer  "updated_by_user_id"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "tasks", ["created_by_user_id"], name: "index_tasks_on_created_by_user_id", using: :btree
+  add_index "tasks", ["project_id", "project_type"], name: "index_tasks_on_project_id_and_project_type", using: :btree
   add_index "tasks", ["task_type_id"], name: "index_tasks_on_task_type_id", using: :btree
   add_index "tasks", ["updated_by_user_id"], name: "index_tasks_on_updated_by_user_id", using: :btree
 
@@ -256,12 +279,16 @@ ActiveRecord::Schema.define(version: 20150427204134) do
     t.string   "employee_type"
     t.boolean  "is_active"
     t.boolean  "is_deleted"
-    t.date     "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "users", ["employee_id", "employee_type"], name: "index_users_on_employee_id_and_employee_type", using: :btree
+
+  add_foreign_key "applications", "projects", name: "applications_project_id_fk"
+
+  add_foreign_key "builds", "projects", name: "builds_project_id_fk"
 
   add_foreign_key "employees", "organizations", name: "employees_organization_id_fk"
 
@@ -271,6 +298,7 @@ ActiveRecord::Schema.define(version: 20150427204134) do
 
   add_foreign_key "project_team_employee_report_tasks", "applications", name: "project_team_employee_report_tasks_application_id_fk"
   add_foreign_key "project_team_employee_report_tasks", "builds", name: "project_team_employee_report_tasks_build_id_fk"
+  add_foreign_key "project_team_employee_report_tasks", "project_team_employee_reports", name: "project_team_employee_report_tasks_proj_team_emp_rpt_id"
   add_foreign_key "project_team_employee_report_tasks", "releases", name: "project_team_employee_report_tasks_release_id_fk"
   add_foreign_key "project_team_employee_report_tasks", "tasks", name: "project_team_employee_report_tasks_task_id_fk"
   add_foreign_key "project_team_employee_report_tasks", "users", name: "project_team_employee_report_tasks_created_by_user_id_fk", column: "created_by_user_id"
@@ -290,6 +318,13 @@ ActiveRecord::Schema.define(version: 20150427204134) do
 
   add_foreign_key "project_teams", "projects", name: "project_teams_project_id_fk"
 
+  add_foreign_key "releases", "projects", name: "releases_project_id_fk"
+
+  add_foreign_key "report_statuses", "projects", name: "report_statuses_project_id_fk"
+
+  add_foreign_key "task_types", "projects", name: "task_types_project_id_fk"
+
+  add_foreign_key "tasks", "projects", name: "tasks_project_id_fk"
   add_foreign_key "tasks", "task_types", name: "tasks_task_type_id_fk"
   add_foreign_key "tasks", "users", name: "tasks_created_by_user_id_fk", column: "created_by_user_id"
   add_foreign_key "tasks", "users", name: "tasks_updated_by_user_id_fk", column: "updated_by_user_id"

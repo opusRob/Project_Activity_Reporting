@@ -5,7 +5,7 @@ class CreateProjectTeams < ActiveRecord::Migration
       t.references :project, polymorphic: true, index: true
       t.boolean :is_active
       t.boolean :is_deleted
-      t.date :deleted_at
+      t.datetime :deleted_at
 
       t.timestamps
       

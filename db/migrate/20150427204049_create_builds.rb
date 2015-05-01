@@ -5,7 +5,7 @@ class CreateBuilds < ActiveRecord::Migration
       t.string :name
       t.boolean :is_active
       t.boolean :is_deleted
-      t.date :deleted_at
+      t.datetime :deleted_at
 
       t.timestamps
       
