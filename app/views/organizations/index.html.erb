@@ -2,7 +2,6 @@
 
 <%= render \
 	partial: "shared/data_panel" \
-	, object: @organizations \
 	, locals: { \
 		data_obj: @organizations \
 		, form_for_obj: :organization \
@@ -11,24 +10,12 @@
 			list_path: organizations_path \
 			, new_path: new_organization_path \
 		}, data_fields: [ \
-			{ \
-				field_name: "name" \
-			} \
-			, { \
-				field_name: "is_active", field_format: "YesNo" \
-			} \
-			, { \
-				field_name: "is_deleted", field_format: "YesNo" \
-			} \
-			, { \
-				field_name: "created_at", field_label: "Created Date", field_format: "%m/%d%Y %l:%M:%S %p" \
-			} \
-			, { \
-				field_name: "updated_at", field_label: "Updated Date", field_format: "%m/%d%Y %l:%M:%S %p" \
-			} \
-			, { \
-				field_name: "deleted_at", field_label: "Deleted Date", field_format: "%m/%d%Y %l:%M:%S %p" \
-			} \
+			{ field_name: "name" } \
+			, { field_name: "is_active", field_format: "YesNo" } \
+			, { field_name: "is_deleted", field_format: "YesNo" } \
+			, { field_name: "created_at", field_label: "Created Date", field_format: "%m/%d%Y %l:%M:%S %p" } \
+			, { field_name: "updated_at", field_label: "Updated Date", field_format: "%m/%d%Y %l:%M:%S %p" } \
+			, { field_name: "deleted_at", field_label: "Deleted Date", field_format: "%m/%d%Y %l:%M:%S %p" } \
 		] \
 	} \
 %>
