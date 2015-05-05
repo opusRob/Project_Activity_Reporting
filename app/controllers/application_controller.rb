@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 						filter_form_params.except!(filter_key.to_sym)
 					else
 						filter_form_params[filter_key.to_sym] = "%" + filter_form_params[filter_key.to_sym] + "%"
-						filter_string += filter_string_leader + "#{filter_key} LIKE :#{filter_key}"
+						filter_string += filter_string_leader + "#{filter_key} ILIKE :#{filter_key}"
 						end
 				when :boolean
 					if ["1", "0"].include?(filter_form_params[filter_key.to_sym]) == false

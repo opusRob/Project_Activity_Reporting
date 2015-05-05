@@ -13,9 +13,9 @@
 			list_path: organizations_path \
 			, new_path: new_organization_path \
 		}, data_fields: [ \
-			{ field_name: "name" } \
-			, { field_name: "is_active", field_label: "Active?", field_format: "YesNo" } \
-			, { field_name: "is_deleted", field_label: "Deleted?", field_format: "YesNo" } \
+			{ field_name: "name", field_filter: true } \
+			, { field_name: "is_active", field_label: "Active?", field_filter: true, field_filter_default: "1", field_format: "YesNo" } \
+			, { field_name: "is_deleted", field_label: "Deleted?", field_filter: true, field_filter_default: "0", field_format: "YesNo" } \
 			, { field_name: "created_at", field_label: "Created Date", field_format: "<nobr>%m/%d/%Y</nobr> <nobr>%l:%M:%S %p</nobr>" } \
 			, { field_name: "updated_at", field_label: "Updated Date", field_format: "<nobr>%m/%d/%Y</nobr> <nobr>%l:%M:%S %p</nobr>" } \
 			, { field_name: "deleted_at", field_label: "Deleted Date", field_format: "<nobr>%m/%d/%Y</nobr> <nobr>%l:%M:%S %p</nobr>" } \

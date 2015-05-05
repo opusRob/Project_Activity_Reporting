@@ -9,17 +9,46 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<% ary_yes_no_all = [ ["All", ""], ["Yes", 1], ["No", 0] ] %>
 					<%= form_for form_for_obj, :method => "get", :url => data_obj_paths[:list_path] do |f| %>
 						<th>
 							<%= link_to_bootstrap_glyphicon(data_obj_paths[:new_path], "sm", "success", "New #{label}", ["plus"]) %>
 						</th>
 						<% data_fields.each do |data_field| %>
-							<% if data_field.has_key?(:field_label) %>
-								<th><nobr><%= data_field[:field_label] %></nobr></th>
-							<% else %>
-								<th><nobr><%= data_field[:field_name].humanize.titlecase %></nobr></th>
-							<% end %>
+							<th>
+								<% field_label = data_field.has_key?(:field_label) ? data_field[:field_label] : data_field[:field_name].humanize.titlecase %>
+								<% field_filter_default = data_field.has_key?(:field_filter_default) ? data_field[:field_filter_default] : "" %>
+								
+								<% if (data_field.has_key?(:field_filter) && data_field[:field_filter]) == false %>
+									<nobr><%= field_label %></nobr>
+								<% else %>
+									<%= f.label data_field[:field_name].to_sym, field_label %>
+									<br/>
+									<% case data_obj.columns_hash[data_field[:field_name]].type %>
+									<% when :string %>
+										<% if params.has_key?(form_for_obj) && params[form_for_obj].has_key?(data_field[:field_name].to_sym) && !params.has_key?("btn_#{form_for_name.downcase}s_reset_filters".to_sym) %>
+											<%= f.text_field data_field[:field_name].to_sym, value: params[form_for_obj][data_field[:field_name].to_sym], class: "form-control input-sm", placeholder: "Enter all or part of a #{data_field[:field_name].downcase}" %>
+										<% else %>
+											<%= f.text_field data_field[:field_name].to_sym, class: "form-control input-sm", placeholder: "Enter all or part of a #{data_field[:field_name].downcase}" %>
+										<% end %>
+									<% when :boolean %>
+										<% case data_field[:field_format] %>
+											<% when "YesNo" %>
+												<% ary_boolean_filter_options = [ ["All", ""], ["Yes", 1], ["No", 0] ] %>
+											<% when "TrueFalse" %>
+												<% ary_boolean_filter_options = [ ["All", ""], ["True", 1], ["False", 0] ] %>
+											<% else %>
+												<% ary_boolean_filter_options = [ ["All", ""], ["Yes", 1], ["No", 0] ] %>
+										<% end %>
+										<% if params.has_key?(form_for_obj) && params[form_for_obj].has_key?(data_field[:field_name].to_sym) && !params.has_key?(:btn_employers_reset_filters) %>
+											<%= f.select data_field[:field_name].to_sym, options_for_select(ary_boolean_filter_options, selected: params[form_for_obj][data_field[:field_name].to_sym]), {}, { :class => "form-control input-sm"} %>
+										<% else %>
+											<%= f.select data_field[:field_name].to_sym, options_for_select(ary_boolean_filter_options, selected: field_filter_default), {}, { :class => "form-control input-sm"} %>
+										<% end %>
+									<% when :datetime, :date %>
+										
+									<% end %>
+								<% end %>
+							</th>
 						<% end %>
 						<th>
 <%
@@ -30,8 +59,8 @@
 <%
 =end
 %>
-							<%= submit_tag "Apply Filters", name: "btn_#{form_for_name}_apply_filters", class: "btn btn-sm btn-primary" %>
-							<%= submit_tag "Reset Filters", name: "btn_#{form_for_name}_reset_filters", class: "btn btn-sm btn-default" %>
+							<%= submit_tag "Apply Filters", name: "btn_#{form_for_name.downcase}s_apply_filters", class: "btn btn-sm btn-primary" %>
+							<%= submit_tag "Reset Filters", name: "btn_#{form_for_name.downcase}s_reset_filters", class: "btn btn-sm btn-default" %>
 						</th>
 					<% end %>
 				</tr>
