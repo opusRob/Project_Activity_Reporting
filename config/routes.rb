@@ -34,6 +34,10 @@ Rails.application.routes.draw do
   resources :employees
 
   resources :organizations
+	post "organizations/:id/activate" => "organizations#activate", as: "activate_organization"
+	post "organizations/:id/deactivate" => "organizations#deactivate", as: "deactivate_organization"
+	post "organizations/:id/do_delete" => "organizations#do_delete", as: "do_delete_organization"
+	post "organizations/:id/undo_delete" => "organizations#undo_delete", as: "undo_delete_organization"
 
 	get 'home/index'
 

@@ -3,11 +3,19 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations
   # GET /organizations.json
-  def index
-  	
+  def index  	
   	page = params.has_key?(:page) ? params[:page] : 1
-  	# @employers = Employer.where({is_active: true, is_deleted: false}).order(name: :asc, created_at: :desc).page(page)
-    @organizations = Organization.all.page(page)
+    
+		if params.has_key?(:btn_organizations_apply_filters)
+			filter_data = prepare_filter_data_for_query(Organization, organization_params, ["name", "is_active", "is_deleted"])
+			if (filter_data[:filter_form_params].keys & filter_data[:filter_keys]).any?
+				@organizations = Organization.where(filter_data[:filter_string], filter_data[:filter_form_params]).order(name: :asc, created_at: :desc).page(page)
+			else
+				@organizations = Organization.all.order(name: :asc, created_at: :desc).page(page)
+			end
+		else
+			@organizations = Organization.where({is_active: true, is_deleted: false}).order(name: :asc, created_at: :desc).page(page)
+		end
   end
 
   # GET /organizations/1
@@ -27,41 +35,35 @@ class OrganizationsController < ApplicationController
   # POST /organizations
   # POST /organizations.json
   def create
-    @organization = Organization.new(organization_params)
-
-    respond_to do |format|
-      if @organization.save
-        format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
-        format.json { render :show, status: :created, location: @organization }
-      else
-        format.html { render :new }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
-      end
-    end
+  	create_record("organization")
   end
 
   # PATCH/PUT /organizations/1
   # PATCH/PUT /organizations/1.json
   def update
-    respond_to do |format|
-      if @organization.update(organization_params)
-        format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
-        format.json { render :show, status: :ok, location: @organization }
-      else
-        format.html { render :edit }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
-      end
-    end
+		update_record("organization")
   end
+  
+  def activate
+  	activate_record("organization")
+  end
+  
+  def deactivate
+  	deactivate_record("organization")
+  end
+	
+	def do_delete
+  	do_delete_record("organization")
+	end
+	
+	def undo_delete
+  	undo_delete_record("organization")
+	end
 
   # DELETE /organizations/1
   # DELETE /organizations/1.json
   def destroy
-    @organization.destroy
-    respond_to do |format|
-      format.html { redirect_to organizations_url, notice: 'Organization was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    destroy_record("organization")
   end
 
   private

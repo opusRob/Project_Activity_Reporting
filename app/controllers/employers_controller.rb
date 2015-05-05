@@ -2,8 +2,8 @@ class EmployersController < ApplicationController
 	before_action :set_employer, only: [:edit, :update, :activate, :deactivate, :do_delete, :undo_delete]  #:show, :destroy
 	# GET /employers
 	# GET /employers.json
-	def index
-		
+	def index		
+			
 		page = params.has_key?(:page) ? params[:page] : 1
 		
 		if params.has_key?(:btn_employers_apply_filters)
@@ -75,7 +75,6 @@ class EmployersController < ApplicationController
 	# PATCH/PUT /employers/1
 	# PATCH/PUT /employers/1.json
 	def update
-		# @employer_record = Employer.find(p
 		respond_to do |format|
 
 			if params[:employer][:is_deleted] == "1" && @employer.is_deleted == false

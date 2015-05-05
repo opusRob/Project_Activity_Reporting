@@ -16,21 +16,23 @@
 						</th>
 						<% data_fields.each do |data_field| %>
 							<% if data_field.has_key?(:field_label) %>
-								<th><%= data_field[:field_label] %></th>
+								<th><nobr><%= data_field[:field_label] %></nobr></th>
 							<% else %>
-								<th><%= data_field[:field_name].humanize.titlecase %></th>
+								<th><nobr><%= data_field[:field_name].humanize.titlecase %></nobr></th>
 							<% end %>
 						<% end %>
+						<th>
 <%
 =begin
 %>
-						<th colspan="3">
-							<%= submit_tag "Apply Filters", name: "btn_employers_apply_filters", class: "btn btn-sm btn-primary" %>
-							<%= submit_tag "Reset Filters", name: "btn_employers_reset_filters", class: "btn btn-sm btn-default" %>
-						</th>
+							%= button_tag_bootstrap_glyphicon("submit", "btn__apply_filters", "sm", "primary", "", ["filter"], {text_end: ""}) %
+							%= button_tag_bootstrap_glyphicon("submit", "btn__reset_filters", "sm", "default", "", ["filter", "remove"], {text_end: ""}) %
 <%
 =end
 %>
+							<%= submit_tag "Apply Filters", name: "btn_#{form_for_name}_apply_filters", class: "btn btn-sm btn-primary" %>
+							<%= submit_tag "Reset Filters", name: "btn_#{form_for_name}_reset_filters", class: "btn btn-sm btn-default" %>
+						</th>
 					<% end %>
 				</tr>
 			</thead>
@@ -55,31 +57,46 @@
 											<% else %>
 												<td><%= data_row_current[data_field[:field_name]] %></td>
 										<% end %>
-									<% when :datetime || :date %>
-										<td><%= data_row_current[data_field[:field_name]].blank? ? "&nbsp;".html_safe : data_row_current[data_field[:field_name]].strftime(data_field[:field_format]) %></td>
+									<% when :datetime, :date %>
+										<td><%= data_row_current[data_field[:field_name]].blank? ? "&nbsp;".html_safe : data_row_current[data_field[:field_name]].strftime(data_field[:field_format]).html_safe %></td>
 								<% end %>
 							<% end %>
-<%
-=begin
-%>
-							<td><%= link_to 'Edit', edit_employer_path(data_row_current) %></td>
+
+
+
+
 							<td>
-								<% if data_row_current.is_active %>
-									<%= link_to 'Deactivate', deactivate_employer_path(data_row_current), method: :deactivate, data: { confirm: 'Are you sure you want to deactivate this record?' } %>
+								<% if record_actions.length > 0 %>
+									<nobr>
+										<% record_actions.each do |record_action| %>
+											<% case record_action %>
+												<% when "show" %>
+												<%= link_to_bootstrap_glyphicon(data_row_current, "sm", "info", "View #{label}", ["search"]) %>
+												<% when "edit" %>
+													<%= link_to_bootstrap_glyphicon(send("edit_#{form_for_name}_path", data_row_current), "sm", "warning", "Edit #{label}", ["pencil"]) %>
+												<% when "activate_deactivate" %>
+													<% if data_row_current.is_active %>
+														<%= link_to_bootstrap_glyphicon(send("deactivate_#{form_for_name}_path", data_row_current), "sm", "warning", "Deactivate #{label}", ["ban-circle"], { method: :deactivate, data: { confirm: 'Are you sure you want to deactivate this record?' } }) %>
+													<% else %>
+														<%= link_to_bootstrap_glyphicon(send("activate_#{form_for_name}_path", data_row_current), "sm", "success", "Activate #{label}", ["check"], { method: :activate, data: { confirm: 'Are you sure you want to activate this record?' } }) %>
+													<% end %>
+												<% when "delete_undelete" %>
+													<% if !data_row_current.is_deleted %>
+														<%= link_to_bootstrap_glyphicon(send("do_delete_#{form_for_name}_path", data_row_current), "sm", "danger", "Delete #{label}", ["trash"], { method: :do_delete, data: { confirm: 'Are you sure you want to delete this record?' } }) %>
+													<% else %>
+														<%= link_to_bootstrap_glyphicon(send("undo_delete_#{form_for_name}_path", data_row_current), "sm", "success", "Undelete #{label}", ["refresh"], { method: :undo_delete, data: { confirm: 'Are you sure you want to undelete this record?' } }) %>
+													<% end %>
+												<% when "destroy" %>
+													<%= link_to_bootstrap_glyphicon(data_row_current, "sm", "danger", "Permanently Delete #{label}", ["fire"], { method: :delete, data: { confirm: "This cannot be undone - are you sure you want to permanently delete this record?" } }) %>
+											<% end %>
+										<% end %>
+									</nobr>
 								<% else %>
-									<%= link_to 'Activate', activate_employer_path(data_row_current), method: :activate, data: { confirm: 'Are you sure you want to activate this record?' } %>
-								<% end %>
+									&npsp;
+								<% end %>	
 							</td>
-							<td>
-								<% if !data_row_current.is_deleted %>
-									<%= link_to 'Delete', do_delete_employer_path(data_row_current), method: :do_delete, data: { confirm: 'Are you sure you want to delete this record?' } %>
-								<% else %>
-									<%= link_to 'Undelete', undo_delete_employer_path(data_row_current), method: :undo_delete, data: { confirm: 'Are you sure you want to undelete this record?' } %>
-								<% end %>
-							</td>
-<%
-=end
-%>
+
+
 
 						</tr>
 					<% end %>
