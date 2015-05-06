@@ -48,6 +48,25 @@ module ApplicationHelper
 			datetime_array.pop()
 		end
 		
+		# If the array is only two elements (month and day), OR its greater than two elements AND the length of the second element is 0:
+		if datetime_array.length == 2 || (datetime_array.length > 2 && datetime_array[2].length == 0)
+			# Set the third element to this year:
+			datetime_array.push(DateTime.now.year.to_s)
+		end
+		
+		# If the array is at least two elements:
+		if datetime_array.length >= 2
+			# Prepend "2", "20", or "200" to it based on it's length, thus it assumes that the shortened year value is in the 2000's:
+			case datetime_array[2].length
+			when 1
+				datetime_array[2] = "200" + datetime_array[2]
+			when 2
+				datetime_array[2] = "20" + datetime_array[2]
+			when 3
+				datetime_array[2] = "2" + datetime_array[2]
+			end
+		end
+		
 		# Rearrange array elements: year, month, day = month, day, year:
 		datetime_array[0], datetime_array[1], datetime_array[2] = datetime_array[2], datetime_array[0], datetime_array[1]
 
