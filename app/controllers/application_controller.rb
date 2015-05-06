@@ -27,6 +27,15 @@ class ApplicationController < ActionController::Base
 					else
 						filter_string += filter_string_leader + "#{filter_key} = :#{filter_key}"
 					end
+				when :datetime, :date
+					# if ( \
+						# filter_form_params[filter_key.to_sym].class == Hash \
+						# && filter_form_params[filter_key.to_sym].has_key?("#{filter_key}_1".to_sym) \
+						# && filter_form_params[filter_key.to_sym].has_key?("#{filter_key}_2".to_sym) \
+					# )
+						# filter_string +=
+					# else
+# 						
 				end
 			end
 		end

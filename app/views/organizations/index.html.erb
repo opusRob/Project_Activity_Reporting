@@ -16,48 +16,10 @@
 			{ field_name: "name", field_filter: true } \
 			, { field_name: "is_active", field_label: "Active?", field_filter: true, field_filter_default: "1", field_format: "YesNo" } \
 			, { field_name: "is_deleted", field_label: "Deleted?", field_filter: true, field_filter_default: "0", field_format: "YesNo" } \
-			, { field_name: "created_at", field_label: "Created Date", field_format: "<nobr>%m/%d/%Y</nobr> <nobr>%l:%M:%S %p</nobr>" } \
+			, { field_name: "created_at", field_label: "Created Date", field_filter: true, field_format: "<nobr>%m/%d/%Y</nobr> <nobr>%l:%M:%S %p</nobr>" } \
 			, { field_name: "updated_at", field_label: "Updated Date", field_format: "<nobr>%m/%d/%Y</nobr> <nobr>%l:%M:%S %p</nobr>" } \
 			, { field_name: "deleted_at", field_label: "Deleted Date", field_format: "<nobr>%m/%d/%Y</nobr> <nobr>%l:%M:%S %p</nobr>" } \
 		] \
 		, record_actions: [ "show", "edit", "activate_deactivate", "delete_undelete", "destroy" ] \
 	} \
-%>
-
-
-
-<%
-=begin
-%>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Is active</th>
-      <th>Is deleted</th>
-      <th>Deleted at</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @organizations.each do |organization| %>
-      <tr>
-        <td><%= organization.name %></td>
-        <td><%= organization.is_active %></td>
-        <td><%= organization.is_deleted %></td>
-        <td><%= organization.deleted_at %></td>
-        <td><%= link_to 'Show', organization %></td>
-        <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
-        <td><%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Organization', new_organization_path %>
-<%
-=end
 %>

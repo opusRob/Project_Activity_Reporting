@@ -21,16 +21,18 @@
 								<% if (data_field.has_key?(:field_filter) && data_field[:field_filter]) == false %>
 									<nobr><%= field_label %></nobr>
 								<% else %>
-									<%= f.label data_field[:field_name].to_sym, field_label %>
-									<br/>
 									<% case data_obj.columns_hash[data_field[:field_name]].type %>
 									<% when :string %>
+										<%= f.label data_field[:field_name].to_sym, field_label %>
+										<br />
 										<% if params.has_key?(form_for_obj) && params[form_for_obj].has_key?(data_field[:field_name].to_sym) && !params.has_key?("btn_#{form_for_name.downcase}s_reset_filters".to_sym) %>
 											<%= f.text_field data_field[:field_name].to_sym, value: params[form_for_obj][data_field[:field_name].to_sym], class: "form-control input-sm", placeholder: "Enter all or part of a #{data_field[:field_name].downcase}" %>
 										<% else %>
 											<%= f.text_field data_field[:field_name].to_sym, class: "form-control input-sm", placeholder: "Enter all or part of a #{data_field[:field_name].downcase}" %>
 										<% end %>
 									<% when :boolean %>
+										<%= f.label data_field[:field_name].to_sym, field_label %>
+										<br />
 										<% case data_field[:field_format] %>
 											<% when "YesNo" %>
 												<% ary_boolean_filter_options = [ ["All", ""], ["Yes", 1], ["No", 0] ] %>
@@ -45,7 +47,75 @@
 											<%= f.select data_field[:field_name].to_sym, options_for_select(ary_boolean_filter_options, selected: field_filter_default), {}, { :class => "form-control input-sm"} %>
 										<% end %>
 									<% when :datetime, :date %>
-										
+										<%= f.label data_field[:field_name].to_sym, field_label %>
+<%
+=begin
+%>
+										<div class="btn-group">
+											<!-- <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+												<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+												<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+												<span class="caret"></span>
+											</button> -->
+											<a href="#" class="dropdown-toggle" style="font-weight: normal; " data-toggle="dropdown" role="button" aria-expanded="false"
+											>(Dates/Times<span class="caret"></span>)</a>
+											<ul class="dropdown-menu" role="menu">
+												<li>
+													<!-- <nobr> -->
+													<% if params.has_key?(form_for_obj) && params[form_for_obj].has_key?(data_field[:field_name].to_sym) && !params.has_key?("btn_#{form_for_name.downcase}s_reset_filters".to_sym) %>
+														<%= f.text_field data_field[:field_name].to_sym, value: params[form_for_obj][data_field[:field_name].to_sym], class: "datetimepicker form-control input-sm", placeholder: "m/d/yyyy hh/nn TT" %>
+														<%= f.text_field data_field[:field_name].to_sym, value: params[form_for_obj][data_field[:field_name].to_sym], class: "datetimepicker form-control input-sm", placeholder: "m/d/yyyy hh/nn TT" %>
+													<% else %>
+														<%= f.text_field data_field[:field_name].to_sym, class: "datetimepicker form-control input-sm", placeholder: "m/d/yyyy hh/nn TT" %>
+														<%= f.text_field data_field[:field_name].to_sym, class: "datetimepicker form-control input-sm", placeholder: "m/d/yyyy hh/nn TT" %>
+													<% end %>
+													<!-- </nobr> -->
+												</li>
+											</ul>
+										</div>
+<%
+=end
+%>
+										<br/>
+										<% if \
+											params.has_key?(form_for_obj) \
+											&& params[form_for_obj].has_key?(data_field[:field_name].to_sym) \
+											&& params[form_for_obj][data_field[:field_name].to_sym].has_key?((data_field[:field_name]+"_1").to_sym) \
+											&& params[form_for_obj][data_field[:field_name].to_sym].has_key?((data_field[:field_name]+"_2").to_sym) \
+											&& !params.has_key?("btn_#{form_for_name.downcase}s_reset_filters".to_sym) \
+										%>
+											<div class="input-group">
+												<span class="input-group-addon" aria-hidden="true" style="font-weight: bold; ">>=</span>
+												<%= text_field_tag "#{form_for_name.downcase}[#{data_field[:field_name]}][#{data_field[:field_name]}_1]", params[form_for_obj][data_field[:field_name].to_sym][(data_field[:field_name]+"_1").to_sym], class: " form-control input-sm datetimepicker", placeholder: "m/d/yyyy hh:nn TT" %>
+											</div>
+											<div class="input-group">
+												<span class="input-group-addon" aria-hidden="true" style="font-weight: bold; "><=</span>
+												<%= text_field_tag "#{form_for_name.downcase}[#{data_field[:field_name]}][#{data_field[:field_name]}_2]", params[form_for_obj][data_field[:field_name].to_sym][(data_field[:field_name]+"_2").to_sym], class: " form-control input-sm datetimepicker", placeholder: "m/d/yyyy hh:nn TT" %>
+											</div>
+<%
+=begin
+%>
+											<%= f.text_field data_field[:field_name].to_sym, value: params[form_for_obj][data_field[:field_name].to_sym], class: " form-control input-sm between-datestimes", placeholder: "mm/dd/yy hh TT - mm/dd/yy hh TT" %>
+<%
+=end
+%>
+										<% else %><!-- datetimepicker between-datestimes -->
+											<div class="input-group">
+												<span class="input-group-addon" aria-hidden="true" style="font-weight: bold; ">>=</span>
+												<%= text_field_tag "#{form_for_name.downcase}[#{data_field[:field_name]}][#{data_field[:field_name]}_1]", "", class: " form-control input-sm datetimepicker", placeholder: "m/d/yyyy hh:nn TT" %>
+											</div>
+											<div class="input-group">
+												<span class="input-group-addon" aria-hidden="true" style="font-weight: bold; "><=</span>
+												<%= text_field_tag "#{form_for_name.downcase}[#{data_field[:field_name]}][#{data_field[:field_name]}_2]", "", class: " form-control input-sm datetimepicker", placeholder: "m/d/yyyy hh:nn TT" %>
+											</div>
+<%
+=begin
+%>
+											<%= f.text_field data_field[:field_name].to_sym, class: " form-control input-sm between-datestimes", placeholder: "mm/dd/yy hh TT - mm/dd/yy hh TT" %>
+<%
+=end
+%>
+										<% end %><!-- datetimepicker between-datestimes -->
 									<% end %>
 								<% end %>
 							</th>

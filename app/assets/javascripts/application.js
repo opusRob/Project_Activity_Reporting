@@ -12,8 +12,28 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.datetimepicker
 // require twitter/bootstrap
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).ready(
+	function() {
+		$('.datetimepicker').datetimepicker({
+			format: 'm/d/Y g:i A'
+			//, mask: true
+			, formatTime: 'g:i A'
+			, step: 60
+			//, inline: true
+		});
+		
+		$(".xdsoft_timepicker").css("width", "70px"); 
+		//$(".xdsoft_prev").css("width", "70px");
+		
+	}
+);
+
+
+

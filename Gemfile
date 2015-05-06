@@ -59,3 +59,5 @@ gem 'kaminari'
 # 
 # gem "twitter-bootstrap-rails"
 # gem 'hsume2-browserify-rails', '~> 0.2.1', :require => 'browserify-rails'
+
+gem 'jquery-datetimepicker-rails'
