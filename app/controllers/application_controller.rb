@@ -3,51 +3,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  # require 'will_paginate/array'
-	# WillPaginate.per_page = 10
-	
-	# def prepare_filter_data_for_query(obj_class, filter_form_params, filter_keys)
-# 		
-		# filter_string = ""
-		# where_params = filter_form_params
-# 		
-		# filter_keys.each do |filter_key|
-			# if where_params.include?(filter_key.to_sym)
-				# filter_string_leader = filter_string.length > 0 ? " AND " : ""
-				# case obj_class.columns_hash[filter_key].type
-				# when :string, :text
-					# if where_params[filter_key.to_sym].length == 0
-						# where_params.except!(filter_key.to_sym)
-					# else
-						# where_params[filter_key.to_sym] = "%" + where_params[filter_key.to_sym] + "%"
-						# filter_string += filter_string_leader + "#{filter_key} ILIKE :#{filter_key}"
-						# end
-				# when :boolean
-					# if ["1", "0"].include?(where_params[filter_key.to_sym]) == false
-						# where_params.except!(filter_key.to_sym)
-					# else
-						# filter_string += filter_string_leader + "#{filter_key} = :#{filter_key}"
-					# end
-				# when :datetime, :date
-					# if ( \
-						# where_params[filter_key.to_sym].class == Hash \
-						# && where_params[filter_key.to_sym].has_key?("#{filter_key}_1".to_sym) \
-						# && where_params[filter_key.to_sym].has_key?("#{filter_key}_2".to_sym) \
-					# )
-						# where_params["#{filter_key}_1".to_sym] = where_params[filter_key.to_sym]["#{filter_key}_1".to_sym]
-						# where_params["#{filter_key}_2".to_sym] = where_params[filter_key.to_sym]["#{filter_key}_2".to_sym]
-# 						
-						# if is_datetime(where_params[filter_key.to_sym]["#{filter_key}_1".to_sym])
-							# filter_string += filter_string_leader + "#{filter_key} >= :#{filter_key}_1"
-						# end
-						# if is_datetime(where_params[filter_key.to_sym]["#{filter_key}_2".to_sym])
-							# filter_string += filter_string_leader + "#{filter_key} >= :#{filter_key}_2"
-						# end
-					# end
-				# end
-			# end
-		# end
-		
 	def prepare_filter_data_for_query(obj_class, filter_form_params, filter_keys)
 		
 		filter_string = ""
@@ -56,39 +11,38 @@ class ApplicationController < ActionController::Base
 		filter_keys.each do |filter_key|
 			if filter_form_params.include?(filter_key.to_sym)
 				filter_string_leader = filter_string.length > 0 ? " AND " : ""
-				case obj_class.columns_hash[filter_key].type
+				if ["_LTE", "_GTE"].include?(filter_key.last(4))
+					filter_key_type = obj_class.columns_hash[ filter_key.first(filter_key.length-4) ].type
+				else
+					filter_key_type = obj_class.columns_hash[filter_key].type 
+				end
+				
+				case filter_key_type
 				when :string, :text
 					if filter_form_params[filter_key.to_sym].length > 0
 						where_params[filter_key.to_sym] = "%" + filter_form_params[filter_key.to_sym] + "%"
 						filter_string += filter_string_leader + "#{filter_key} ILIKE :#{filter_key}"
-						end
+					end
 				when :boolean
 					if ["1", "0"].include?(filter_form_params[filter_key.to_sym])
 						where_params[filter_key.to_sym] = filter_form_params[filter_key.to_sym]
 						filter_string += filter_string_leader + "#{filter_key} = :#{filter_key}"
 					end
 				when :datetime, :date
-					if ( \
-						filter_form_params[filter_key.to_sym].class == Hash \
-						&& filter_form_params[filter_key.to_sym].has_key?("#{filter_key}_1".to_sym) \
-						&& filter_form_params[filter_key.to_sym].has_key?("#{filter_key}_2".to_sym) \
-					)
-						if is_datetime(filter_form_params[filter_key.to_sym]["#{filter_key}_1".to_sym])
-							where_params["#{filter_key}_1".to_sym] = filter_form_params[filter_key.to_sym]["#{filter_key}_1".to_sym]
-							filter_string += filter_string_leader + "#{filter_key} >= :#{filter_key}_1"
+						if is_datetime(filter_form_params[filter_key.to_sym])
+							where_params[filter_key.to_sym] = parse_datetime(filter_form_params[filter_key.to_sym]).utc
+							case filter_key.last(4)
+								when "_GTE"
+									filter_string += filter_string_leader + "#{filter_key.first(filter_key.length-4)} >= :#{filter_key}"
+								when "_LTE"
+									filter_string += filter_string_leader + "#{filter_key.first(filter_key.length-4)} <= :#{filter_key}"
+								else
+									filter_string += filter_string_leader + "#{filter_key} = :#{filter_key}"
+							end
 						end
-						if is_datetime(filter_form_params[filter_key.to_sym]["#{filter_key}_2".to_sym])
-							where_params["#{filter_key}_2".to_sym] = filter_form_params[filter_key.to_sym]["#{filter_key}_2".to_sym]
-							filter_string += filter_string_leader + "#{filter_key} <= :#{filter_key}_2"
-						end
-					elsif is_datetime(filter_form_params[filter_key.to_sym])
-						where_params[filter_key.to_sym] = filter_form_params[filter_key.to_sym]
-						filter_string += filter_string_leader + "#{filter_key} = :#{filter_key}"
-					end
 				end
 			end
-		end
-		
+		end		
 		
 		return { \
 			filter_string: filter_string \
@@ -293,5 +247,11 @@ class ApplicationController < ActionController::Base
 		# return datetime_array
 		
 	end
+	
+	# def datetime_to_string(datetime_value)
+		# datetime_array = datetime_value.to_s.split("-")
+		# datetime_string = ""
+		# if datetime_array.length > 0
+	# end
   
 end

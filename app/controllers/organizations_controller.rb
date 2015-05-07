@@ -8,9 +8,14 @@ class OrganizationsController < ApplicationController
     
 		if params.has_key?(:btn_organizations_apply_filters)
 			Rails.logger.debug "*** organization_params ***:" + organization_params.inspect
-			filter_data = prepare_filter_data_for_query(Organization, organization_params, ["name", "is_active", "is_deleted", "created_at"])
+			filter_data = prepare_filter_data_for_query(Organization, organization_params, ["name", "is_active", "is_deleted", "created_at_GTE", "created_at_LTE"])
+			
 			Rails.logger.debug "*** filter_data ***:" + filter_data.inspect
-			if (filter_data[:where_params].keys & filter_data[:filter_keys]).any?
+			Rails.logger.debug "*** (filter_data[:where_params].keys & (filter_data[:filter_keys].map &:to_sym)).any? ***:" + (filter_data[:where_params].keys & (filter_data[:filter_keys].map &:to_sym)).any?.inspect
+			Rails.logger.debug "*** filter_data[:where_params].keys ***:" + filter_data[:where_params].keys.inspect
+			Rails.logger.debug "*** (filter_data[:filter_keys].map &:to_sym)***:" + (filter_data[:filter_keys].map &:to_sym).inspect
+			
+			if (filter_data[:where_params].keys & (filter_data[:filter_keys].map &:to_sym)).any?
 				@organizations = Organization.where(filter_data[:filter_string], filter_data[:where_params]).order(name: :asc, created_at: :desc).page(page)
 			else
 				@organizations = Organization.all.order(name: :asc, created_at: :desc).page(page)
@@ -76,6 +81,18 @@ class OrganizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-      params.require(:organization).permit(:name, :is_active, :is_deleted, { created_at: [:created_at_1, :created_at_2] }, :updated_at, :deleted_at)
+      params.require(:organization).permit( \
+      	:name \
+      	, :is_active \
+      	, :is_deleted \
+      	, :created_at_GTE \
+      	, :created_at_LTE \
+      	, :updated_at \
+      	, :updated_at_GTE \
+      	, :updated_at_LTE \
+      	, :deleted_at \
+      	, :deleted_at_GTE \
+      	, :deleted_at_LTE \
+      )
     end
 end
