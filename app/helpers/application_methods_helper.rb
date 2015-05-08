@@ -70,16 +70,7 @@ module ApplicationMethodsHelper
 		# Rearrange array elements: year, month, day = month, day, year:
 		datetime_array[0], datetime_array[1], datetime_array[2] = datetime_array[2], datetime_array[0], datetime_array[1]
 
-		# Attempt to return a datetime using the array elements:
-		# return DateTime.new( \
-			# datetime_array[0].to_i \
-			# , datetime_array[1].to_i \
-			# , datetime_array[2].to_i \
-			# , datetime_array.length > 3 && (0..23).include?(datetime_array[3].to_i) ? datetime_array[3].to_i : 0 \
-			# , datetime_array.length > 4 && (0..59).include?(datetime_array[4].to_i) ? datetime_array[4].to_i : 0 \
-			# , datetime_array.length > 5 && (0..59).include?(datetime_array[5].to_i) ? datetime_array[5].to_i : 0 \
-		# )
-		
+		# Attempt to return a datetime using the array elements:		
 		return DateTime.civil_from_format( \
 			:local \
 			, datetime_array[0].to_i \
