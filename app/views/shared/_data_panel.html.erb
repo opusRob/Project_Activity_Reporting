@@ -1,5 +1,4 @@
 
-<%= debug params %>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<div class="panel-title">
@@ -126,7 +125,7 @@
 										<% record_actions.each do |record_action| %>
 											<% case record_action %>
 												<% when "show" %>
-												<%= link_to_bootstrap_glyphicon(data_row_current, "sm", "info", "View #{label}", ["search"]) %>
+												<%= link_to_bootstrap_glyphicon(data_row_current, "sm", "info", "View #{label}", ["open"]) %>
 												<% when "edit" %>
 													<%= link_to_bootstrap_glyphicon(send("edit_#{form_for_name}_path", data_row_current), "sm", "warning", "Edit #{label}", ["pencil"]) %>
 												<% when "activate_deactivate" %>
