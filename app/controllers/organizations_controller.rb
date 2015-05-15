@@ -7,21 +7,24 @@ class OrganizationsController < ApplicationController
   	page = params.has_key?(:page) ? params[:page] : 1
     
 		if params.has_key?(:btn_organizations_apply_filters)
-			Rails.logger.debug "*** organization_params ***:" + organization_params.inspect
+			# Rails.logger.debug "*** organization_params ***:" + organization_params.inspect
 			filter_data = prepare_filter_data_for_query(Organization, organization_params, ["name", "is_active", "is_deleted", "created_at_GTE", "created_at_LTE"])
 			
-			Rails.logger.debug "*** filter_data ***:" + filter_data.inspect
-			Rails.logger.debug "*** (filter_data[:where_params].keys & (filter_data[:filter_keys].map &:to_sym)).any? ***:" + (filter_data[:where_params].keys & (filter_data[:filter_keys].map &:to_sym)).any?.inspect
-			Rails.logger.debug "*** filter_data[:where_params].keys ***:" + filter_data[:where_params].keys.inspect
-			Rails.logger.debug "*** (filter_data[:filter_keys].map &:to_sym)***:" + (filter_data[:filter_keys].map &:to_sym).inspect
+			# Rails.logger.debug "*** filter_data ***:" + filter_data.inspect
+			# Rails.logger.debug "*** (filter_data[:where_params].keys & (filter_data[:filter_keys].map &:to_sym)).any? ***:" + (filter_data[:where_params].keys & (filter_data[:filter_keys].map &:to_sym)).any?.inspect
+			# Rails.logger.debug "*** filter_data[:where_params].keys ***:" + filter_data[:where_params].keys.inspect
+			# Rails.logger.debug "*** (filter_data[:filter_keys].map &:to_sym)***:" + (filter_data[:filter_keys].map &:to_sym).inspect
 			
 			if (filter_data[:where_params].keys & (filter_data[:filter_keys].map &:to_sym)).any?
 				@organizations = Organization.where(filter_data[:filter_string], filter_data[:where_params]).order(name: :asc, created_at: :desc).page(page)
+				# @organizations = Organization.select("organizations.*", "projects.name AS project_name").joins("LEFT OUTER JOIN project_organizations ON project_organizations.organization_id = organizations.id LEFT OUTER JOIN projects ON projects.id = project_organizations.project_id").where(filter_data[:filter_string], filter_data[:where_params]).order(name: :asc, created_at: :desc).page(page)
 			else
 				@organizations = Organization.all.order(name: :asc, created_at: :desc).page(page)
+				# @organizations = Organization.select("organizations.*", "projects.name AS project_name").joins("LEFT OUTER JOIN project_organizations ON project_organizations.organization_id = organizations.id LEFT OUTER JOIN projects ON projects.id = project_organizations.project_id").all.order(name: :asc, created_at: :desc).page(page)
 			end
 		else
 			@organizations = Organization.where({is_active: true, is_deleted: false}).order(name: :asc, created_at: :desc).page(page)
+			# @organizations = Organization.select("organizations.*", "projects.name AS project_name").joins("LEFT OUTER JOIN project_organizations ON project_organizations.organization_id = organizations.id LEFT OUTER JOIN projects ON projects.id = project_organizations.project_id").where({is_active: true, is_deleted: false}).order(name: :asc, created_at: :desc).page(page)
 		end
   end
 

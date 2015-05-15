@@ -2,6 +2,21 @@
 
 <%= render partial: "shared/notice_saved" %>
 
+
+<%
+=begin
+%>
+<%= debug @organizations %>
+<% @organizations.each do |organization| %>
+	<% organization.projects.each do |project| %>
+		<%= debug organization.project.name %>
+	<% end %>
+<% end %>
+<%
+=end
+%>
+
+
 <%= render \
 	partial: "shared/data_panel" \
 	, locals: { \
@@ -16,10 +31,24 @@
 			{ field_name: "name", field_filter: true } \
 			, { field_name: "is_active", field_label: "Active?", field_filter: true, field_filter_default: "1", field_format: "YesNo" } \
 			, { field_name: "is_deleted", field_label: "Deleted?", field_filter: true, field_filter_default: "0", field_format: "YesNo" } \
+		] \
+		, record_actions: [ "show", "edit", "activate_deactivate", "delete_undelete", "destroy" ] \
+		, record_show_options: [ \
+			{ text: "<strong>Employees</strong> of \"{{name}}\"", href: "#" } \
+			, { text: "<strong>Users</strong> of \"{{name}}\"", href: "#" } \
+			, { text: "<strong>Projects</strong> of \"{{name}}\"", href: "#" } \
+			, { text: "<strong>Project Team Employee Reports</strong> of \"{{name}}\"", href: "#" } \
+		] \
+	} \
+%>
+
+<%
+=begin
+%>
+
 			, { field_name: "created_at", field_label: "Created Date", field_filter: true, field_format: "<nobr>%m/%d/%Y</nobr> <nobr>%l:%M:%S %p</nobr>" } \
 			, { field_name: "updated_at", field_label: "Updated Date", field_format: "<nobr>%m/%d/%Y</nobr> <nobr>%l:%M:%S %p</nobr>" } \
 			, { field_name: "deleted_at", field_label: "Deleted Date", field_format: "<nobr>%m/%d/%Y</nobr> <nobr>%l:%M:%S %p</nobr>" } \
-		] \
-		, record_actions: [ "show", "edit", "activate_deactivate", "delete_undelete", "destroy" ] \
-	} \
+<%
+=end
 %>

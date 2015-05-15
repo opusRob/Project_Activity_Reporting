@@ -122,28 +122,59 @@
 							<td>
 								<% if record_actions.length > 0 %>
 									<nobr>
-										<% record_actions.each do |record_action| %>
-											<% case record_action %>
-												<% when "show" %>
+										<div class="btn-toolbar" role="toolbar" aria-label="Record Actions">
+											<div class="btn-group" role="group" aria-label="Record View Options">
 												<%= link_to_bootstrap_glyphicon(data_row_current, "sm", "info", "View #{label}", ["open"]) %>
-												<% when "edit" %>
-													<%= link_to_bootstrap_glyphicon(send("edit_#{form_for_name}_path", data_row_current), "sm", "warning", "Edit #{label}", ["pencil"]) %>
-												<% when "activate_deactivate" %>
-													<% if data_row_current.is_active %>
-														<%= link_to_bootstrap_glyphicon(send("deactivate_#{form_for_name}_path", data_row_current), "sm", "warning", "Deactivate #{label}", ["ban-circle"], { method: :deactivate, data: { confirm: 'Are you sure you want to deactivate this record?' } }) %>
-													<% else %>
-														<%= link_to_bootstrap_glyphicon(send("activate_#{form_for_name}_path", data_row_current), "sm", "success", "Activate #{label}", ["check"], { method: :activate, data: { confirm: 'Are you sure you want to activate this record?' } }) %>
+												<a href="#" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+													<span class="caret"></span>
+													<span class="sr-only">Toggle Dropdown</span>
+												</a>
+												<ul class="dropdown-menu" role="menu">
+													<% record_show_options.each do |record_show_option| %>
+														<% if !record_show_option.has_key?(:href_anchor) %>
+															<% record_show_option[:href_anchor] = record_show_option[:text].downcase.titlecase.gsub(/\s/, "").underscore %>
+														<% end %>
+														
+														<% record_show_option_text = record_show_option[:text] %>
+														<% record_show_option_matches = record_show_option_text.scan(/{{([^{}]+)}}/).uniq %>
+														<% record_show_option_matches.each do |record_show_option_match| %>
+															<% record_show_option_text = record_show_option_text.gsub("{{" + record_show_option_match[0] + "}}", data_row_current[record_show_option_match[0].to_sym]) %>
+														<% end %>
+														<li><%= link_to record_show_option_text.html_safe, organization_path(data_row_current, anchor: record_show_option[:href_anchor]) %></li>
 													<% end %>
-												<% when "delete_undelete" %>
-													<% if !data_row_current.is_deleted %>
-														<%= link_to_bootstrap_glyphicon(send("do_delete_#{form_for_name}_path", data_row_current), "sm", "danger", "Delete #{label}", ["trash"], { method: :do_delete, data: { confirm: 'Are you sure you want to delete this record?' } }) %>
-													<% else %>
-														<%= link_to_bootstrap_glyphicon(send("undo_delete_#{form_for_name}_path", data_row_current), "sm", "success", "Undelete #{label}", ["refresh"], { method: :undo_delete, data: { confirm: 'Are you sure you want to undelete this record?' } }) %>
+												</ul>
+											</div>
+											
+											<% if (record_actions & ["edit", "activate"]).any? %>
+												<div class="btn-group" role="group" aria-label="Record Edit Options">
+													<% if record_actions.include?("edit") %>
+														<%= link_to_bootstrap_glyphicon(send("edit_#{form_for_name}_path", data_row_current), "sm", "warning", "Edit #{label}", ["pencil"]) %>
 													<% end %>
-												<% when "destroy" %>
-													<%= link_to_bootstrap_glyphicon(data_row_current, "sm", "danger", "Permanently Delete #{label}", ["fire"], { method: :delete, data: { confirm: "This cannot be undone - are you sure you want to permanently delete this record?" } }) %>
+													<% if record_actions.include?("activate_deactivate") %>
+														<% if data_row_current.is_active %>
+															<%= link_to_bootstrap_glyphicon(send("deactivate_#{form_for_name}_path", data_row_current), "sm", "warning", "Deactivate #{label}", ["ban-circle"], { method: :deactivate, data: { confirm: 'Are you sure you want to deactivate this record?' } }) %>
+														<% else %>
+															<%= link_to_bootstrap_glyphicon(send("activate_#{form_for_name}_path", data_row_current), "sm", "success", "Activate #{label}", ["check"], { method: :activate, data: { confirm: 'Are you sure you want to activate this record?' } }) %>
+														<% end %>
+													<% end %>
+												</div>
 											<% end %>
-										<% end %>
+											
+											<% if (record_actions & ["delete_undelete", "destroy"]).any? %>
+												<div class="btn-group" role="group" aria-label="Record Delete Options">
+													<% if record_actions.include?("delete_undelete") %>
+														<% if !data_row_current.is_deleted %>
+															<%= link_to_bootstrap_glyphicon(send("do_delete_#{form_for_name}_path", data_row_current), "sm", "danger", "Delete #{label}", ["trash"], { method: :do_delete, data: { confirm: 'Are you sure you want to delete this record?' } }) %>
+														<% else %>
+															<%= link_to_bootstrap_glyphicon(send("undo_delete_#{form_for_name}_path", data_row_current), "sm", "success", "Undelete #{label}", ["refresh"], { method: :undo_delete, data: { confirm: 'Are you sure you want to undelete this record?' } }) %>
+														<% end %>
+													<% end %>
+													<% if record_actions.include?("destroy") %>
+														<%= link_to_bootstrap_glyphicon(data_row_current, "sm", "danger", "Permanently Delete #{label}", ["fire"], { method: :delete, data: { confirm: "This cannot be undone - are you sure you want to permanently delete this record?" } }) %>
+													<% end %>
+												</div>
+											<% end %>
+										</div>
 									</nobr>
 								<% else %>
 									&npsp;
