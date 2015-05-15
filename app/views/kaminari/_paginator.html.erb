@@ -16,18 +16,61 @@
 <% pagination[:page_start_row] = ((pagination[:page] - 1) * pagination[:per_page]) + 1 %>
 <% pagination[:page_end_row] = pagination[:page] == pagination[:total_pages] ? pagination[:total_count] : pagination[:page_start_row] + pagination[:per_page] - 1 %>
 <% pagination[:rows_this_page_count] = pagination[:page_end_row] - pagination[:page_start_row] + 1 %>
-
+<% pagination[:dropup] = local_assigns.has_key?(:dropup) && dropup ? true : false %>
 <%= paginator.render do -%>
 	<div class="records_found">
 		Showing <%= pagination[:page_start_row] %> - <%= pagination[:page_end_row] %>
 		of <%= pluralize(pagination[:total_count], "record") %> found.
 	</div>
 	<nav class="pagination">
+		<div class="btn-group" role="group" aria-label="">
+			<%= first_page_tag %>
+			<%= prev_page_tag %>
+<%
+=begin
+%>
+			<% label_tag :page do %>
+				<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+			<% end %>
+			<% pagination_redirect_url = "document.location.href=('#{url_for(params.except(:page))}".html_safe + (params.except(:page).length ? "&" : "?") + "page=' + String(this.value))"  %>
+			<%= select_tag :page, options_for_select((1..(total_pages > 0 ? total_pages : 1)).to_a, selected: current_page), onchange: pagination_redirect_url %>
+			of <%= total_pages %>
+<%
+=end
+%>
+  
+			<div class="btn-group <%= pagination[:dropup] ? 'dropup' : '' %>" role="group">
+				<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" <%= total_pages > 1 ? '' : 'disabled' %>>
+					<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+					<%= current_page %> of <%= total_pages %>
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<% (1..(total_pages > 0 ? total_pages : 1)).to_a.each do |page_menu_option| %>
+						<li class="<%= page_menu_option == current_page ? 'active' : '' %>">
+							<%= link_to \
+								"Page <strong>#{page_menu_option}</strong> of #{total_pages}".html_safe \
+								, "#{url_for(params.except(:page))}".html_safe + (params.except(:page, :action, :controller).length > 0 ? "&" : "?") + "page=#{page_menu_option}"
+							%>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+  
+  
+			<%= next_page_tag %>
+			<%= last_page_tag %>
+		</div>
+<%
+=begin
+%>
 		<%= first_page_tag %>
 		|
 		<%= prev_page_tag %>
 		|
-		<%= label_tag :page %>
+		<% label_tag :page do %>
+			<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+		<% end %>
 		<% pagination_redirect_url = "document.location.href=('#{url_for(params.except(:page))}".html_safe + (params.except(:page).length ? "&" : "?") + "page=' + String(this.value))"  %>
 		<%= select_tag :page, options_for_select((1..(total_pages > 0 ? total_pages : 1)).to_a, selected: current_page), onchange: pagination_redirect_url %>
 		of <%= total_pages %>
@@ -35,5 +78,8 @@
 		<%= next_page_tag %>
 		|
 		<%= last_page_tag %>
+<%
+=end
+%>
 	</nav>
 <% end -%>

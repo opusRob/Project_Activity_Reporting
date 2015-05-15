@@ -34,8 +34,9 @@ table th {
 }
 
 .panel-heading {
+	height: 45px; 
 	padding: 8px 5px 5px 5px; 
-	overflow: hidden; 
+	overflow: visible; 
 }
 
 .panel-body {

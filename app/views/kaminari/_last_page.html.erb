@@ -6,6 +6,29 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<span class="last">
-  <%= link_to_unless current_page.last?, t('views.pagination.last').html_safe, url, :remote => remote %>
-</span>
+<!-- <span class="last"> -->
+<%
+=begin
+%>
+	<%= link_to_unless current_page.last?, t('views.pagination.last').html_safe, url, :remote => remote %>
+	<%= link_to_bootstrap_glyphicon_unless current_page.last?, url, "sm", "default", t('views.pagination.last').html_safe, ["fast-forward"], {remote: remote} %>
+<%
+=end
+%>
+	<% button_options = {} %>
+	<%if current_page.last? %>
+		<% button_options[:class] = "btn-disabled" %>
+		<% button_options[:disabled] = true %>
+	<% else %>
+		<% button_options[:onclick] = "location.href='#{url}'; " %>
+	<% end %>
+	<%= button_tag_bootstrap_glyphicon \
+		"button" \
+		, "btn_pagination_last_page" \
+		, "sm" \
+		, "default" \
+		, t('views.pagination.last').html_safe \
+		, ["fast-forward"] \
+		, options = button_options \
+	%>
+<!-- </span> -->
