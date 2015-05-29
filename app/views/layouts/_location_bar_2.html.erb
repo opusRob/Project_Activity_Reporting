@@ -1,0 +1,29 @@
+
+<% current_controller = params.has_key?(:controller) ? params[:controller] : '' %>
+
+<nav class="navbar navbar-default navbar-fixed-top location_bar">
+<!-- <nav class="navbar location_bar"> -->
+	<div class="container">
+		<div class="navbar-header">
+			Location:
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<!-- <li role="presentation" class="">Location:</li> -->
+				<li role="presentation" class=""><a href="#" class="current_location">Organizations</a></li>
+				<li role="presentation" class="current_location"><a href="#" class="current_location">Dunkin' Donuts</a></li>
+				<li role="presentation" class="current_location">
+					<a href="#" class="dropdown-toggle current_location" data-toggle="dropdown" role="button" aria-expanded="false">
+						Employees <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li class="<%= current_controller == 'users' ? 'active' : '' %>"><%= link_to "Employees", users_path %></li>
+						<li class="<%= current_controller == 'users' ? 'active' : '' %>"><%= link_to "Users", users_path %></li>
+						<li class="<%= current_controller == 'users' ? 'active' : '' %>"><%= link_to "Projects", users_path %></li>
+						<li class="<%= current_controller == 'users' ? 'active' : '' %>"><%= link_to "Project Team Employee Reports", users_path %></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

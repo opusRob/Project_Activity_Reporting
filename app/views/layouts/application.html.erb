@@ -14,62 +14,10 @@
 		
 	</head>
 	<body role="document">
-
-		<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Project Activity Reporting</a>
-				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<% current_controller = params.has_key?(:controller) ? params[:controller] : '' %>
-						<li class="<%= current_controller == 'employers' ? 'active' : '' %>"><%= link_to "Employers", employers_path %></li>
-						<li class="dropdown <%= current_controller == 'organizations' ? 'active' : '' %>">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Organizations <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li class="<%= current_controller == 'organizations' ? 'active' : '' %>"><%= link_to "Organizations", organizations_path %></li>
-								<li class="<%= current_controller == 'employees' ? 'active' : '' %>"><%= link_to "Employees", employees_path %></li>
-							</ul>
-						</li>
-						<li class="dropdown <%= current_controller == 'users' ? 'active' : '' %>">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Users <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li class="<%= current_controller == 'users' ? 'active' : '' %>"><%= link_to "Users", users_path %></li>
-								<li class="divider"></li>
-								<li class="<%= current_controller == 'system_roles' ? 'active' : '' %>"><%= link_to "System Roles", system_roles_path %></li>
-							</ul>
-						</li>
-						<li class="dropdown <%= current_controller == 'Projects' ? 'active' : '' %>">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li class="<%= current_controller == 'projects' ? 'active' : '' %>"><%= link_to "Projects", projects_path %></li>
-								<li class="<%= current_controller == 'project_organizations' ? 'active' : '' %>"><%= link_to "Project Organizations", project_organizations_path %></li>
-								<li class="<%= current_controller == 'project_organization_types' ? 'active' : '' %>"><%= link_to "Project Organization Types", project_organization_types_path %></li>
-								<li class="<%= current_controller == 'project_teams' ? 'active' : '' %>"><%= link_to "Project Teams", project_teams_path %></li>
-								<li class="<%= current_controller == 'project_team_employees' ? 'active' : '' %>"><%= link_to "Project Team Employees", project_team_employees_path %></li>
-								<li class="divider"></li>
-								<li class="<%= current_controller == 'project_team_roles' ? 'active' : '' %>"><%= link_to "Project Team Roles", project_team_roles_path %></li>
-								<li class="<%= current_controller == 'report_statuses' ? 'active' : '' %>"><%= link_to "Report Statuses", report_statuses_path %></li>
-								<li class="divider"></li>
-								<li class="<%= current_controller == 'applications' ? 'active' : '' %>"><%= link_to "Applications", applications_path %></li>
-								<li class="<%= current_controller == 'releases' ? 'active' : '' %>"><%= link_to "Releases", releases_path %></li>
-								<li class="<%= current_controller == 'builds' ? 'active' : '' %>"><%= link_to "Builds", builds_path %></li>
-								<li class="<%= current_controller == 'tasks' ? 'active' : '' %>"><%= link_to "Tasks", tasks_path %></li>
-								<li class="<%= current_controller == 'task_types' ? 'active' : '' %>"><%= link_to "Task Types", task_types_path %></li>
-							</ul>
-						</li>
-						<li class="dropdown <%= current_controller == 'project_team_employee_reports' ? 'active' : '' %>">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Project Team Employee Reports <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li class="<%= current_controller == 'project_team_employee_reports' ? 'active' : '' %>"><%= link_to "Project Team Employee Reports", project_team_employee_reports_path %></li>
-								<li class="<%= current_controller == 'project_team_employee_report_tasks' ? 'active' : '' %>"><%= link_to "Project Team Employee Report Tasks", project_team_employee_report_tasks_path %></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-
+		
+		<%= render "layouts/location_bar_2" %>
+		<%= render "layouts/navbar" %>
+		
 		<div class="container theme-showcase" role="main">
 			<%= yield %>
 		</div>

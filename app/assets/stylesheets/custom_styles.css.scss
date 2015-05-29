@@ -1,9 +1,12 @@
 
-.navbar .nav > li > a {
+.navbar .nav li a {
 	padding: 15px; 
 }
+.navbar .nav ul.dropdown-menu li a {
+	padding: 3px 20px; 
+}
 
-body { padding-top: 40px; }
+body { padding-top: 70px; }
 
 @media screen and (max-width: 768px) {
     body { padding-top: 0px; }
@@ -54,4 +57,76 @@ table th {
 
 .between-datestimes {
 	width: 205px; 
+}
+//location_Bar 1 -------------------------------------------------------------------------------------
+//.location_bar ul { width: 700px; text-align : center }
+// nav.location_bar {
+  // border: none; 
+  // border-bottom: solid 1px #cccccc; 
+  // border-radius: 0px; 
+  // min-height: 25px; 
+  // position: fixed;
+  // background: #ffffff;  
+// }
+// .location_bar ul li.current_location {
+	// display: inline;
+	// white-space: nowrap;
+// }
+// .location_bar ul {
+  // list-style: none;
+  // padding: 0;
+  // white-space: nowrap; 
+// }
+// .location_bar ul li.current_location:before {
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+	// position: relative; 
+	// top: 1px; 
+	// line-height: 1;
+	// padding: 0 0px; 
+	// display: inline; 
+	// font-family: 'Glyphicons Halflings';
+	// color: #cccccc;
+	// font-size: 12px;  
+	// font-weight: normal;
+	// font-style: normal;
+	// content: '\e250';
+// }
+// .location_bar ul li a {
+	// display: inline; 
+// }
+// 
+// .navbar.location_bar .nav li a {
+	// padding-bottom: 10px; 
+// }
+
+//location_Bar 2 -------------------------------------------------------------------------------------
+nav.location_bar {
+	top: 50px; 
+	background: #ffffff;
+	min-height: 30px;
+	white-space: nowrap;
+	padding: 5px 0px 0px 0px;
+}
+
+.location_bar ul li.current_location:before {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	position: relative; 
+	top: 1px; 
+	line-height: 1;
+	padding: 0 0px; 
+	display: inline; 
+	font-family: 'Glyphicons Halflings';
+	color: #cccccc;
+	font-size: 12px;  
+	font-weight: normal;
+	font-style: normal;
+	content: '\e250';
+}
+.location_bar ul li.current_location {
+	padding: 0px; 
+}
+.location_bar ul li a.current_location {
+	display: inline;
 }
